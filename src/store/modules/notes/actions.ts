@@ -1,37 +1,25 @@
-import { Commit } from 'vuex';
-// import { AxiosResponse } from 'axios';
+import { Commit, Dispatch } from 'vuex';
+import { axiosAuthenticated } from '@/api/api';
 import * as types from './mutation-types';
-// import { axiosAuthenticated, axiosUnauthenticated } from '@/api/api';
 
 // TODO
 // Find a better name than note
 // getNoteType from fixed backend service
 // getLabels " => categories - labels => tags
-// all "notes" stay in one large object - api is called by specific type => generic
 // stronly typed entities is mainly base entity from db (=id) ;-)
 
 /* eslint-disable object-curly-newline, max-len, object-property-newline */ // Allow test data onliner
-export const getNoteTypes = ({ commit } : { commit: Commit}) => {
-  const noteTypes: any[] = [ // + noteFields // TODO strongly type
-    { id: 1, order: 1, name: 'note', title: 'Note', description: 'Write a simple note.', owner: null, key: 'note', fields: [] },
-    { id: 2, order: 2, name: 'task', title: 'Task', description: 'A task you must complete.', owner: null, key: 'task', fields: [
-      { id: 1, order: 1, name: 'completed', title: 'Completed', description: 'Is it done?', type: 'boolean', showInViews: true },
-      { id: 5, order: 2, name: 'due', title: 'Due', description: 'When is it due?', type: 'date', showInViews: true },
-    ] },
-    { id: 3, order: 3, name: 'goal', title: 'Goal', description: 'A goal you want to achieve.', owner: null, key: 'goal', fields: [
-      { id: 2, order: 1, name: 'achieved', title: 'Achieved', description: 'Did you make it?', type: 'boolean', showInViews: true },
-    ] },
-    { id: 4, order: 4, name: 'journal', title: 'Journal', description: 'Summarize your day or write down your thoughts.', owner: null, key: 'journal', fields: [] },
-    { id: 5, order: 5, name: 'activity', title: 'Activity', description: 'Something you\'ve done.', owner: null, key: 'activity', fields: [] },
-    { id: 6, order: 6, name: 'habit', title: 'Habit', description: 'Record your habits.', owner: null, key: 'habit', fields: [] },
-    { id: 7, order: 7, name: 'routine', title: 'Routine', description: 'Write down what you want to do every day.', owner: null, key: 'routine', fields: [] },
-    { id: 8, order: 8, name: 'weight', title: 'Weight', description: 'Track your weight.', owner: null, key: 'weight', fields: [
-      { id: 3, order: 1, name: 'height', title: 'Height', description: 'Your height in cm.', type: 'number', showInViews: false },
-      { id: 4, order: 2, name: 'weight', title: 'Weight', description: 'Your weight in kg.', type: 'number', showInViews: true },
-    ] },
-  ];
-
-  commit(types.GET_NOTE_TYPES, noteTypes);
+export const getNoteTypes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
+  axiosAuthenticated.get('NoteTypes', {})
+    .then((result) => {
+      console.log(result);
+      const noteTypes = result.data.value;
+      commit(types.GET_NOTE_TYPES, noteTypes);
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      commit(types.GET_NOTE_TYPES, null); // TODO ? _FAILED
+    });
 };
 
 export const getLabels = ({ commit } : { commit: Commit}) => {

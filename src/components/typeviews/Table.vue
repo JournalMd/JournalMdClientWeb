@@ -14,7 +14,9 @@
       :hide-default-footer="compact"
     >
       <template v-slot:item.typeId="{ item }">
-        <v-chip :color="item.typeId | typecolor"><v-icon color="white">{{ item.typeId | typeicon }}</v-icon></v-chip>
+        <v-chip :color="noteTypes.find(sel => sel.id === item.typeId).name | typecolor">
+          <v-icon color="white">{{ noteTypes.find(sel => sel.id === item.typeId).name | typeicon }}</v-icon>
+        </v-chip>
       </template>
       <template v-slot:item.mood="{ item }">
         <v-icon :color="item.mood | emoticoncolor">{{ item.mood | emoticonicon }}</v-icon>
@@ -78,7 +80,7 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
     // Create headers for fields of single note type
     const fieldsHeader = this.noteTypes
       .find((sel: any) => sel.id === noteTypes[0])
-      .fields.filter((sel: any) => sel.showInViews).map((sel: any) => ({
+      .noteFields/* .filter((sel: any) => sel.showInViews) */.map((sel: any) => ({
         text: sel.title,
         value: `fields.${sel.name}.value`,
       }));

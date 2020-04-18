@@ -1,5 +1,5 @@
 <template>
-  <BaseCard>
+  <BaseCard v-if="noteTypes != null">
     <Table v-if="viewType === 'table'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
        @edit-note="onEdit" @delete-note="onDelete" />
     <Timeline v-else-if="viewType === 'timeline'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"

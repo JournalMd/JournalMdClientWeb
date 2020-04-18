@@ -1,6 +1,12 @@
 <template>
   <v-timeline dense>
-    <v-timeline-item v-for="note in notes" :key="note.id" :icon="note.typeId | typeicon" :color="note.typeId | typecolor" fill-dot small>
+    <v-timeline-item
+      v-for="note in notes"
+      :key="note.id"
+      :icon="noteTypes.find(sel => sel.id === note.typeId).name | typeicon"
+      :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+      fill-dot small
+    >
       <v-row justify="space-between">
         <v-col cols="7">
           <v-tooltip bottom v-if="note.description">
@@ -28,5 +34,7 @@ import MarkdownText from '@/components/MarkdownText.vue';
 })
 export default class TimelineSmall extends Mixins(NoteTypesMixin) {
   @Prop(Array) notes!: any[];
+
+  @Prop(Array) noteTypes!: any[];
 }
 </script>

@@ -6,14 +6,17 @@
           <template>
             <v-list-item-content>
               <v-list-item-title>
-                <v-icon v-if="compact" :color="note.typeId | typecolor" style="vertical-align: baseline" size="16">
-                  {{ note.typeId | typeicon }}
-                </v-icon>
+              <v-icon v-if="compact" :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+                  style="vertical-align: baseline" size="16">
+                {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+              </v-icon>
                 {{ note.title }}
               </v-list-item-title>
               <v-list-item-subtitle v-if="!compact" class="ml-4 mt-2"><MarkdownText :text="note.description" /></v-list-item-subtitle>
               <v-list-item-subtitle v-if="!compact">
-                <v-icon :color="note.typeId | typecolor">{{ note.typeId | typeicon }}</v-icon>
+                <v-icon :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
+                  {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+                </v-icon>
                 <v-icon :color="note.mood | emoticoncolor">{{ note.mood | emoticonicon }}</v-icon>
                 <LabelList :labels="note.labels" />
               </v-list-item-subtitle>
@@ -57,6 +60,8 @@ import LabelList from '@/components/LabelList.vue';
 })
 export default class List extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];
+
+  @Prop(Array) noteTypes!: any[];
 
   @Prop(Boolean) compact!: boolean;
 }

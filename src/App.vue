@@ -27,9 +27,7 @@ export default class App extends Vue {
 
     EventBus.$on(NAVIGATE, (route: string) => { this.$router.push(route); });
     EventBus.$on(AUTHENTICATED, (authenticated: boolean) => {
-      console.log('EventBus.$on(AUTHENTICATED');
       if (authenticated) {
-        console.log('EventBus.$on(getUser');
         this.$store.dispatch('user/getUser'); // TODO: handle elsewhere
         this.$store.dispatch('notes/getNoteTypes'); // TODO: handle elsewhere
         this.$store.dispatch('notes/getLabels'); // TODO: handle elsewhere

@@ -39,7 +39,7 @@
                 ></v-autocomplete>
               </v-col>
 
-              <v-col cols="12" v-for="field in type.fields" :key="field.id">
+              <v-col cols="12" v-for="field in type.noteFields" :key="field.id">
                 <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.name].value" :label="field.title"
                               filled :rules="[rules.number, rules.required]"></v-text-field>
                 <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.name].value" :label="field.title"></v-checkbox>
@@ -123,7 +123,7 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
       this.type = this.$store.state.dialogs.createNote;
 
       // create empty fields
-      const noteFields = this.type.fields.reduce((map: any, field: any) => {
+      const noteFields = this.type.noteFields.reduce((map: any, field: any) => {
         const newMap = map;
         newMap[field.name] = {
           id: -1,

@@ -10,7 +10,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "generate:specs": "java -jar ../zzzHelper/swagger-codegen-cli.jar generate -i https://localhost:44302/swagger/v1/swagger.json -Dio.swagger.v3.parser.util.RemoteUrl.trustAll=true -l typescript-angular -o src/models/swagger_tmp"
   },
   "dependencies": {
     "@types/chartist": "^0.9.46",

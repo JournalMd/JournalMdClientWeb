@@ -1,7 +1,6 @@
 import { Commit, Dispatch } from 'vuex';
-import { AxiosResponse } from 'axios';
-import { axiosAuthenticated, axiosUnauthenticated } from '../../../api/api';
-import { User } from '../../../models/user';
+import { axiosAuthenticated } from '@/api/api';
+import { User } from '@/models/user';
 import * as types from './mutation-types';
 
 export const getUser = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {

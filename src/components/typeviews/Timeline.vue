@@ -1,9 +1,15 @@
 <template>
   <v-timeline dense>
-    <v-timeline-item v-for="note in notes" :key="note.id" :icon="note.typeId | typeicon" :color="note.typeId | typecolor" fill-dot>
+    <v-timeline-item
+      v-for="note in notes"
+      :key="note.id"
+      :icon="noteTypes.find(sel => sel.id === note.typeId).name | typeicon"
+      :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+      fill-dot
+    >
       <v-card>
-        <v-card-title class="timelineTitle" :class="note.typeId | typecolor">
-          <v-icon dark size="32" class="mr-4">{{ note.typeId | typeicon }}</v-icon>
+        <v-card-title class="timelineTitle" :class="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
+          <v-icon dark size="32" class="mr-4">{{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}</v-icon>
           <h2 class="white--text font-weight-light" v-text="$d(note.createdAt, 'long')"></h2>
           <v-spacer></v-spacer>
           <v-icon dark size="32" class="mr-4">{{ note.mood | emoticonicon }}</v-icon>
@@ -58,5 +64,7 @@ import LabelList from '@/components/LabelList.vue';
 })
 export default class Timeline extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];
+
+  @Prop(Array) noteTypes!: any[];
 }
 </script>

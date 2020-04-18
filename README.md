@@ -40,6 +40,20 @@ yarn global add @vue/cli
 yarn global add @vue/cli-service-global
 ```
 
+### Generate models from swagger
+
+Windows. Install [swagger-codegen-cli](https://github.com/swagger-api/swagger-codegen/tree/3.0.0) using PowerShell.
+
+```powershell
+Invoke-WebRequest -OutFile swagger-codegen-cli.jar https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/3.0.19/swagger-codegen-cli-3.0.19.jar
+```
+
+```sh
+yarn run generate:specs
+```
+
+Copy `src/models/swagger_tmp/model` to `src/models/`
+
 ## Resources used
 
 * [Awesome Vue](https://github.com/vuejs/awesome-vue)

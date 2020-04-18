@@ -10,7 +10,9 @@
 
           <v-card-actions>
             <v-btn icon>
-              <v-icon :color="note.typeId | typecolor">{{ note.typeId | typeicon }}</v-icon>
+              <v-icon :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
+                {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+              </v-icon>
             </v-btn>
             <v-btn icon>
               <v-icon :color="note.mood | emoticoncolor">{{ note.mood | emoticonicon }}</v-icon>
@@ -47,5 +49,7 @@ import EmoticonsMixin from '@/mixins/emoticons';
 @Component
 export default class CardList extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];
+
+  @Prop(Array) noteTypes!: any[];
 }
 </script>
