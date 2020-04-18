@@ -127,7 +127,6 @@ import EntryList from '@/components/EntryList.vue';
 import Inspiration from '@/components/Inspiration.vue';
 
 const notesModule = namespace('notes');
-const userModule = namespace('user');
 
 @Component({
   components: {
@@ -138,11 +137,5 @@ export default class Dashboard extends Mixins(NoteTypesMixin) {
   @notesModule.State noteTypes: any;
 
   @notesModule.Getter getNotesByType: any;
-
-  @userModule.Action('getUser') getUserAction: any;
-
-  mounted() {
-    this.getUserAction();
-  }
 }
 </script>

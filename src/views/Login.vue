@@ -1,6 +1,6 @@
-﻿<template>
+<template>
   <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" v-if="!authenticated">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
@@ -20,6 +20,15 @@
             <v-btn color="primary" @click="login()" :loading="loading">{{ $t('views.login') }}</v-btn>
           </v-card-actions>
         </v-card>
+      </v-col>
+    </v-row>
+    <v-row align="center" justify="center" v-if="authenticated">
+      <v-col cols="12">
+        <v-progress-circular
+          :size="120"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
       </v-col>
     </v-row>
   </v-container>

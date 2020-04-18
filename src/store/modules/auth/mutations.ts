@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import { axiosAuthenticated, axiosUnauthenticated } from '../../../api/api';
-import router from '../../../router';
+import { axiosAuthenticated, axiosUnauthenticated } from '@/api/api';
+import EventBus from '@/helper/eventBus';
+import { NAVIGATE, AUTHENTICATED } from '@/helper/event-bus-types';
 import {
   CHECK,
   REGISTER,
@@ -16,11 +17,12 @@ export default {
     state.authenticated = !!localStorage.getItem('authToken');
     if (state.authenticated) {
       axiosAuthenticated.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('authToken')}`;
+      EventBus.$emit(AUTHENTICATED, true);
     }
   },
 
   [REGISTER]() {
-    router.push('/login');
+    EventBus.$emit(NAVIGATE, '/login');
   },
 
   [REGISTER_FAILED](state: any) {
@@ -32,7 +34,8 @@ export default {
     localStorage.setItem('authToken', token);
     axiosAuthenticated.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-    router.push('/');
+    EventBus.$emit(AUTHENTICATED, true);
+    EventBus.$emit(NAVIGATE, '/');
   },
 
   [LOGIN_FAILED](state: any) {

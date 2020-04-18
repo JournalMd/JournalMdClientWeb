@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-navigation-drawer v-model="drawer" app v-if="authenticated">
+    <v-navigation-drawer v-model="drawer" app v-if="authenticated && user != null">
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>

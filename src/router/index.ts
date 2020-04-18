@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { Route } from 'vue-router';
-import store from '../store';
-import Dashboard from '../views/Dashboard.vue';
+import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -9,7 +8,6 @@ function requireAuth(to: Route, from: Route, next: any) {
   if (!(store.state as any).auth.authenticated) {
     next({
       path: '/login',
-      // query: { redirect: to.fullPath, from: from.fullPath },
     });
   } else {
     next();
@@ -21,7 +19,7 @@ const routes = [
   {
     path: '/',
     name: 'dashboard',
-    component: Dashboard,
+    component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
     beforeEnter: requireAuth,
   },
   {
