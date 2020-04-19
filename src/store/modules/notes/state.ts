@@ -1,12 +1,12 @@
 export default {
-  noteTypes: null,
-  labels: null,
-  inspirations: null,
-  notes: null,
+  noteTypes: [],
+  labels: [],
+  inspirations: [],
+  notes: [],
 
-  /* noteTypes: null,
-  categories: null,
-  tags: null,
-  inspirations: null,
-  notes: null, */
+  /* noteTypes: [],
+  categories: [],
+  tags: [],
+  inspirations: [],
+  notes: [], */
 };

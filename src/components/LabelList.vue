@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-if="stateLabels.length > 1">
     <v-chip v-for="labelId in labels" :key="labelId" class="ma-1" x-small v-text="getName(labelId)"></v-chip>
   </span>
 </template>

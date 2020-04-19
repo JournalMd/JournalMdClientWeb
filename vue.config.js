@@ -7,8 +7,6 @@ module.exports = {
     watchOptions: {
       poll: true,
     },
-    proxy: 'http://localhost:44302',
-    public: 'localhost:44302',
   },
 
   pwa: {
