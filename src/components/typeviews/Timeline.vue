@@ -3,14 +3,14 @@
     <v-timeline-item
       v-for="note in notes"
       :key="note.id"
-      :icon="noteTypes.find(sel => sel.id === note.typeId).name | typeicon"
-      :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+      :icon="noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon"
+      :color="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor"
       fill-dot
     >
       <v-card>
-        <v-card-title class="timelineTitle" :class="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
-          <v-icon dark size="32" class="mr-4">{{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}</v-icon>
-          <h2 class="white--text font-weight-light" v-text="$d(note.createdAt, 'long')"></h2>
+        <v-card-title class="timelineTitle" :class="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor">
+          <v-icon dark size="32" class="mr-4">{{ noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon }}</v-icon>
+          <h2 class="white--text font-weight-light" v-text="$d(note.date, 'long')"></h2>
           <v-spacer></v-spacer>
           <v-icon dark size="32" class="mr-4">{{ note.mood | emoticonicon }}</v-icon>
           <v-menu offset-y>

@@ -145,7 +145,8 @@ export default class Navbar extends Vue {
           { icon: 'mdi-run', text: 'views.activities', route: '/types/activity' },
           { icon: 'mdi-flash-circle', text: 'views.habits', route: '/types/habit' },
           { icon: 'mdi-autorenew', text: 'views.routine', route: '/types/routine' },
-          { icon: 'mdi-scale-bathroom', text: 'views.weight', route: '/types/weight' },
+          { icon: 'mdi-scale-bathroom', text: 'views.weight', route: '/types/weightmeasurement' },
+          { icon: 'mdi-human-handsdown', text: 'views.bodymeasurement', route: '/types/bodymeasurement' },
         ],
       },
       {
@@ -159,7 +160,11 @@ export default class Navbar extends Vue {
             route: '/types/all?view=graph&viewsettings=%7B%22type%22%3A%22Pie%22%2C%22field%22%3A%22mood%22%7D',
           },
           { icon: 'mdi-emoticon', text: 'views.mood', route: '/types/all?view=graph&viewsettings=%7B%22field%22%3A%22mood%22%7D' },
-          { icon: 'mdi-run', text: 'views.weight', route: '/types/weight?view=graph&viewsettings=%7B%22field%22%3A%22weight%22%7D' },
+          {
+            icon: 'mdi-run',
+            text: 'views.weight',
+            route: '/types/weightmeasurement?view=graph&viewsettings=%7B%22field%22%3A%225%22%7D',
+          },
           { icon: 'mdi-heart', text: 'views.bucketList', route: '/types/goal?view=card-list&categories=14' },
         ],
       },

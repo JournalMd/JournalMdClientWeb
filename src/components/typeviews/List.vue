@@ -6,16 +6,16 @@
           <template>
             <v-list-item-content>
               <v-list-item-title>
-              <v-icon v-if="compact" :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+              <v-icon v-if="compact" :color="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor"
                   style="vertical-align: baseline" size="16">
-                {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+                {{ noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon }}
               </v-icon>
                 {{ note.title }}
               </v-list-item-title>
               <v-list-item-subtitle v-if="!compact" class="ml-4 mt-2"><MarkdownText :text="note.description" /></v-list-item-subtitle>
               <v-list-item-subtitle v-if="!compact">
-                <v-icon :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
-                  {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+                <v-icon :color="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor">
+                  {{ noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon }}
                 </v-icon>
                 <v-icon :color="note.mood | emoticoncolor">{{ note.mood | emoticonicon }}</v-icon>
                 <CategoryList :categories="note.categories" />
@@ -24,7 +24,7 @@
             </v-list-item-content>
 
             <v-list-item-action v-if="!compact">
-              <v-list-item-action-text v-text="$d(note.createdAt, 'long')"></v-list-item-action-text>
+              <v-list-item-action-text v-text="$d(note.date, 'long')"></v-list-item-action-text>
               <v-menu offset-y>
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on"><v-icon>mdi-dots-vertical</v-icon></v-btn>

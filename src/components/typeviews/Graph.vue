@@ -50,7 +50,7 @@ export default class Graph extends Mixins(NoteTypesMixin) {
 
   chartType: string = 'Line';
 
-  field: string = 'mood';
+  field: string = 'mood'; // mood = special - field id otherwise
 
   mounted() {
     this.updateData();
@@ -64,7 +64,7 @@ export default class Graph extends Mixins(NoteTypesMixin) {
   updateData() {
     this.field = this.viewSettings && this.viewSettings.field ? this.viewSettings.field : 'mood';
 
-    if (this.field === 'mood') {
+    if (this.field === 'mood') { // mood = special - field id otherwise
       this.chartType = this.viewSettings && this.viewSettings.type ? this.viewSettings.type : 'Bar'; // Mood looks better with Bar
     } else {
       this.chartType = this.viewSettings && this.viewSettings.type ? this.viewSettings.type : 'Line'; // Fields get line/timeSeries
@@ -88,7 +88,7 @@ export default class Graph extends Mixins(NoteTypesMixin) {
         name: 'field-series',
         // data [{ x: new Date(143134652600), y: 53 }, ...]
         data: _(this.notes.map(sel => ({
-          x: sel.createdAt,
+          x: sel.date,
           y: +sel.fields[this.field].value,
         }))).orderBy('x', 'asc').value(),
       };

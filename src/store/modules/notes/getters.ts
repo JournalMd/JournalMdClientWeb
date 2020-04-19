@@ -6,8 +6,8 @@ export const getNotesByType = (state: any) => (type: string) => {
   const foundType = state.noteTypes.find((sel: { name: string; }) => sel.name === type);
   if (foundType === undefined) return state.notes;
 
-  const typeId = foundType.id;
-  return state.notes.filter((sel: { typeId: string; }) => +sel.typeId === +typeId);
+  const noteTypeId = foundType.id;
+  return state.notes.filter((sel: { noteTypeId: string; }) => +sel.noteTypeId === +noteTypeId);
 };
 
 export const getNoteById = (state: any) => (id: number) => state.notes.find((sel: { id: string; }) => +sel.id === +id);

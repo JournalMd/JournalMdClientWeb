@@ -10,8 +10,8 @@
 
           <v-card-actions>
             <v-btn icon>
-              <v-icon :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor">
-                {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
+              <v-icon :color="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor">
+                {{ noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon }}
               </v-icon>
             </v-btn>
             <v-btn icon>

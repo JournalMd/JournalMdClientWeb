@@ -13,16 +13,16 @@
       :hide-default-header="compact"
       :hide-default-footer="compact"
     >
-      <template v-slot:item.typeId="{ item }">
-        <v-chip :color="noteTypes.find(sel => sel.id === item.typeId).name | typecolor">
-          <v-icon color="white">{{ noteTypes.find(sel => sel.id === item.typeId).name | typeicon }}</v-icon>
+      <template v-slot:item.noteTypeId="{ item }">
+        <v-chip :color="noteTypes.find(sel => sel.id === item.noteTypeId).name | typecolor">
+          <v-icon color="white">{{ noteTypes.find(sel => sel.id === item.noteTypeId).name | typeicon }}</v-icon>
         </v-chip>
       </template>
       <template v-slot:item.mood="{ item }">
         <v-icon :color="item.mood | emoticoncolor">{{ item.mood | emoticonicon }}</v-icon>
       </template>
-      <template v-slot:item.createdAt="{ item }">
-        {{ $d(item.createdAt, 'long') }}
+      <template v-slot:item.date="{ item }">
+        {{ $d(item.date, 'long') }}
       </template>
       <template v-slot:item.categories="{ item }">
         <CategoryList :categories="item.categories" />
@@ -64,12 +64,15 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   search: string = '';
 
   get headers() {
-    const baseHeader = [
-      { text: 'Type', value: 'typeId' },
-      { text: 'Title', value: 'title', sortable: false },
-      // { text: 'Description', value: 'description', sortable: false }, // <MarkdownText :text="note.description" />
+    const typeHeader = [
+      { text: 'Type', value: 'noteTypeId' },
+      { text: 'Title', value: 'title' },
+      { text: 'Description', value: 'description' },
       { text: 'Mood', value: 'mood' },
-      { text: 'Created', value: 'createdAt' },
+    ];
+
+    const baseHeader = [
+      { text: 'Created', value: 'date' },
       { text: 'Categories', value: 'categories', sortable: false },
       { text: 'Tags', value: 'tags', sortable: false },
     ];
@@ -78,21 +81,22 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
       { text: this.$t('general.actions'), value: 'action', sortable: false },
     ];
 
-    // f multiple node types are shown then only return the base header without fields
-    const noteTypes = this.notes.map(sel => sel.typeId);
-    if (_.uniq(noteTypes).length > 1) {
-      return [...baseHeader, ...actionsHeader];
+    // If multiple node types are shown then only return the base header without fields
+    const noteTypes = this.notes.map(sel => sel.noteTypeId);
+    if (noteTypes == null || _.uniq(noteTypes).length > 1) {
+      return [...typeHeader, ...baseHeader, ...actionsHeader];
     }
 
     // Create headers for fields of single note type
     const fieldsHeader = this.noteTypes
-      .find((sel: any) => sel.id === noteTypes[0])
-      .noteFields/* .filter((sel: any) => sel.showInViews) */.map((sel: any) => ({
+      .find((sel: any) => sel.id === noteTypes[0]) // Find the type which maps to the above selected notes[0].noteTypeId
+      .noteFields/* .filter((sel: any) => sel.showInViews) */
+      .map((sel: any) => ({
         text: sel.title,
-        value: `fields.${sel.name}.value`,
+        value: `fields.${sel.id}.value`,
       }));
 
-    return [...baseHeader, ...fieldsHeader, ...actionsHeader];
+    return [...typeHeader, ...fieldsHeader, ...baseHeader, ...actionsHeader];
   }
 }
 </script>

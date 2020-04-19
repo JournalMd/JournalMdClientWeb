@@ -47,8 +47,8 @@ export default class EntryList extends Mixins(NoteTypesMixin) {
 
   @dialogsModule.Action('createNote') createNoteAction!: any;
 
-  createNote(typeId: number) {
-    const type = this.getTypeById(typeId);
+  createNote(noteTypeId: number) {
+    const type = this.getTypeById(noteTypeId);
     this.createNoteAction(type);
   }
 }

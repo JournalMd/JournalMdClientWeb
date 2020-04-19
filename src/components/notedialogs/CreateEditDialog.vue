@@ -16,8 +16,13 @@
                   :rules="[rules.required, rules.min3]"></v-text-field>
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" v-if="!type.noteDescriptionShort">
                 <vue-easymde v-model="note.description" ref="markdownEditor" :configs="configs" />
+              </v-col>
+
+              <v-col cols="12" v-if="type.noteDescriptionShort">
+                <v-text-field v-model="note.description" :label="$t('fields.description')" filled
+                  :rules="[rules.required, rules.min3]"></v-text-field>
               </v-col>
 
               <v-col cols="12">
@@ -54,16 +59,16 @@
               </v-col>
 
               <v-col cols="12" v-for="field in type.noteFields" :key="field.id">
-                <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.name].value" :label="field.title"
+                <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.id].value" :label="field.title"
                               filled :rules="[rules.number, rules.required]"></v-text-field>
-                <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.name].value" :label="field.title"></v-checkbox>
+                <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.id].value" :label="field.title"></v-checkbox>
                 <v-menu v-if="field.type === 'date'" v-model="datemenu" :close-on-content-click="false" :nudge-right="40"
                         transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
-                    <v-text-field v-model="note.fields[field.name].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on">
+                    <v-text-field v-model="note.fields[field.id].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on">
                     </v-text-field>
                   </template>
-                  <v-date-picker v-model="note.fields[field.name].value" @input="datemenu = false"></v-date-picker>
+                  <v-date-picker v-model="note.fields[field.id].value" @input="datemenu = false"></v-date-picker>
                 </v-menu>
               </v-col>
             </v-row>
@@ -134,14 +139,14 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
   get mode() {
     if (this.$store.state.dialogs.editNote !== null) {
       this.note = this.$store.state.dialogs.editNote;
-      this.type = this.getTypeById(this.note.typeId);
+      this.type = this.getTypeById(this.note.noteTypeId);
     } else if (this.$store.state.dialogs.createNote !== null) {
       this.type = this.$store.state.dialogs.createNote;
 
       // create empty fields
       const noteFields = this.type.noteFields.reduce((map: any, field: any) => {
         const newMap = map;
-        newMap[field.name] = {
+        newMap[field.id] = {
           id: -1,
           fieldId: field.id,
           value: '',
@@ -153,7 +158,7 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
         title: '',
         description: '',
         mood: 3,
-        typeId: this.$store.state.dialogs.createNote.id,
+        noteTypeId: this.$store.state.dialogs.createNote.id,
         fields: noteFields,
       };
     } // else - won't show anyway

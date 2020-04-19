@@ -3,8 +3,8 @@
     <v-timeline-item
       v-for="note in notes"
       :key="note.id"
-      :icon="noteTypes.find(sel => sel.id === note.typeId).name | typeicon"
-      :color="noteTypes.find(sel => sel.id === note.typeId).name | typecolor"
+      :icon="noteTypes.find(sel => sel.id === note.noteTypeId).name | typeicon"
+      :color="noteTypes.find(sel => sel.id === note.noteTypeId).name | typecolor"
       fill-dot small
     >
       <v-row justify="space-between">
@@ -17,7 +17,7 @@
           </v-tooltip>
           <span v-else v-text="note.title"></span>
         </v-col>
-        <v-col class="text-right" cols="5" v-text="$d(note.createdAt, 'long')"></v-col>
+        <v-col class="text-right" cols="5" v-text="$d(note.date, 'long')"></v-col>
       </v-row>
     </v-timeline-item>
   </v-timeline>

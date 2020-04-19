@@ -1,5 +1,5 @@
 <template>
-  <BaseCard v-if="noteTypes.length > 0">
+  <BaseCard v-if="noteTypes.length > 0 && notes.length > 0">
     <Table v-if="viewType === 'table'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
       :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <Timeline v-else-if="viewType === 'timeline'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
@@ -76,12 +76,12 @@ export default class TypeViewWrapper extends Mixins(NoteTypesMixin) {
   @notesModule.Getter getNotesByType: any;
 
   get filteredNotes() {
-    // return orderBy(this.notes, 'createdAt', 'desc');
+    // return orderBy(this.notes, 'date', 'desc');
     let filter = _(this.notes);
 
     if (this.filterTypes != null && this.filterTypes.length > 0) {
-      // find typeId in filterTypes array
-      filter = filter.filter(sel => this.filterTypes.indexOf(sel.typeId) !== -1);
+      // find noteTypeId in filterTypes array
+      filter = filter.filter(sel => this.filterTypes.indexOf(sel.noteTypeId) !== -1);
     }
 
     if (this.filterCategories != null && this.filterCategories.length > 0) {
@@ -98,7 +98,7 @@ export default class TypeViewWrapper extends Mixins(NoteTypesMixin) {
           .find(subSel => subSel === tagId) !== undefined));
     }
 
-    filter = filter.orderBy(['typeId', 'createdAt'], ['asc', 'desc']); // order before take!
+    filter = filter.orderBy(['noteTypeId', 'date'], ['asc', 'desc']); // order before take!
 
     if (this.maxItems != null) {
       filter = filter.take(this.maxItems);

@@ -8,7 +8,6 @@ import {
   EDIT_NOTE,
   DELETE_NOTE,
 } from './mutation-types';
-// import { User } from '@/models/user';
 
 export default {
   [GET_NOTE_TYPES](state: any, noteTypes: any[]) {
@@ -24,6 +23,15 @@ export default {
     state.inspirations = inspirations;
   },
   [GET_NOTES](state: any, notes: any[]) {
+    /* eslint-disable no-param-reassign */
+    notes.forEach((value) => {
+      value.date = new Date(value.date);
+      value.fields = {};
+      value.noteValues.forEach((nv: any) => {
+        value.fields[nv.noteFieldId] = nv;
+      });
+    });
+    /* eslint-enable no-param-reassign */
     state.notes = notes;
   },
   [CREATE_NOTE](state: any, note: any) {
