@@ -24,7 +24,8 @@
         <TypeViewWrapper
           :viewType="selectedViewType"
           :notes="getNotesByType(route.params.type)"
-          :filterLabels="filterLabels"
+          :filterCategories="filterCategories"
+          :filterTags="filterTags"
           :viewSettings="viewSettings"
         />
       </v-col>
@@ -58,7 +59,9 @@ export default class Overview extends Mixins(NoteTypesMixin) {
 
   viewSettings: any = {};
 
-  filterLabels: number[] = [];
+  filterCategories: number[] = [];
+
+  filterTags: number[] = [];
 
   viewTypes: { value: string, text: string }[] = [
     { value: 'table', text: 'Table' },
@@ -78,7 +81,9 @@ export default class Overview extends Mixins(NoteTypesMixin) {
 
     this.viewSettings = this.route.query.viewsettings ? JSON.parse(this.route.query.viewsettings) : {};
 
-    this.filterLabels = this.route.query.labels ? this.route.query.labels.split(',').map((sel: string) => +sel) : [];
+    this.filterCategories = this.route.query.categories ? this.route.query.categories.split(',').map((sel: string) => +sel) : [];
+
+    this.filterTags = this.route.query.tags ? this.route.query.tags.split(',').map((sel: string) => +sel) : [];
   }
 
   @Watch('$route')
@@ -89,7 +94,9 @@ export default class Overview extends Mixins(NoteTypesMixin) {
 
     this.viewSettings = to.query.viewsettings ? JSON.parse(to.query.viewsettings) : {};
 
-    this.filterLabels = to.query.labels ? to.query.labels.split(',').map((sel: string) => +sel) : [];
+    this.filterCategories = to.query.categories ? to.query.categories.split(',').map((sel: string) => +sel) : [];
+
+    this.filterTags = to.query.tags ? to.query.tags.split(',').map((sel: string) => +sel) : [];
   }
 }
 </script>

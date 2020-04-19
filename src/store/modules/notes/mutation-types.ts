@@ -1,5 +1,6 @@
 export const GET_NOTE_TYPES = 'GET_NOTE_TYPES';
-export const GET_LABELS = 'GET_LABELS';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_TAGS = 'GET_TAGS';
 export const GET_INSPIRATIONS = 'GET_INSPIRATIONS';
 
 export const GET_NOTES = 'GET_NOTES';
@@ -9,7 +10,8 @@ export const DELETE_NOTE = 'DELETE_NOTE';
 
 export default {
   GET_NOTE_TYPES,
-  GET_LABELS,
+  GET_CATEGORIES,
+  GET_TAGS,
   GET_INSPIRATIONS,
   GET_NOTES,
   CREATE_NOTE,

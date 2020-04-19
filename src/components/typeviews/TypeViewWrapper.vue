@@ -1,17 +1,17 @@
 <template>
   <BaseCard v-if="noteTypes.length > 0">
-    <Table v-if="viewType === 'table'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
-       @edit-note="onEdit" @delete-note="onDelete" />
-    <Timeline v-else-if="viewType === 'timeline'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
-       @edit-note="onEdit" @delete-note="onDelete" />
+    <Table v-if="viewType === 'table'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
+    <Timeline v-else-if="viewType === 'timeline'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <TimelineSmall v-else-if="viewType === 'timeline-small'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
-      :labels="labels" @edit="onEdit" @delete-note="onDelete" />
-    <List v-else-if="viewType === 'list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
-       @edit-note="onEdit" @delete-note="onDelete" />
-    <CardList v-else-if="viewType === 'card-list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
-       @edit-note="onEdit" @delete-note="onDelete" />
-    <Graph v-else-if="viewType === 'graph'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes" :labels="labels"
-       @edit-note="onEdit" @delete-note="onDelete" />
+      :categories="categories" :tags="tags" @edit="onEdit" @delete-note="onDelete" />
+    <List v-else-if="viewType === 'list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
+    <CardList v-else-if="viewType === 'card-list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
+    <Graph v-else-if="viewType === 'graph'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <div v-else>-</div>
   </BaseCard>
 </template>
@@ -63,11 +63,15 @@ export default class TypeViewWrapper extends Mixins(NoteTypesMixin) {
 
   @Prop(Array) filterTypes!: number[];
 
-  @Prop(Array) filterLabels!: number[];
+  @Prop(Array) filterCategories!: number[];
+
+  @Prop(Array) filterTags!: number[];
 
   @notesModule.State noteTypes: any;
 
-  @notesModule.State labels: any;
+  @notesModule.State categories: any;
+
+  @notesModule.State tags: any;
 
   @notesModule.Getter getNotesByType: any;
 
@@ -80,11 +84,18 @@ export default class TypeViewWrapper extends Mixins(NoteTypesMixin) {
       filter = filter.filter(sel => this.filterTypes.indexOf(sel.typeId) !== -1);
     }
 
-    if (this.filterLabels != null && this.filterLabels.length > 0) {
-      // find one matching label id from labels array in filterLabels array
-      filter = filter.filter(sel => sel.labels
-        .some((labelId: number) => this.filterLabels
-          .find(subSel => subSel === labelId) !== undefined));
+    if (this.filterCategories != null && this.filterCategories.length > 0) {
+      // find one matching category id from categories array in filterCategories array
+      filter = filter.filter(sel => sel.categories
+        .some((categoryId: number) => this.filterCategories
+          .find(subSel => subSel === categoryId) !== undefined));
+    }
+
+    if (this.filterTags != null && this.filterTags.length > 0) {
+      // find one matching tag id from tags array in filterTags array
+      filter = filter.filter(sel => sel.tags
+        .some((tagId: number) => this.filterTags
+          .find(subSel => subSel === tagId) !== undefined));
     }
 
     filter = filter.orderBy(['typeId', 'createdAt'], ['asc', 'desc']); // order before take!

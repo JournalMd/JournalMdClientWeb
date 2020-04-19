@@ -1,6 +1,7 @@
 import {
   GET_NOTE_TYPES,
-  GET_LABELS,
+  GET_CATEGORIES,
+  GET_TAGS,
   GET_INSPIRATIONS,
   GET_NOTES,
   CREATE_NOTE,
@@ -13,8 +14,11 @@ export default {
   [GET_NOTE_TYPES](state: any, noteTypes: any[]) {
     state.noteTypes = noteTypes;
   },
-  [GET_LABELS](state: any, labels: any[]) {
-    state.labels = labels;
+  [GET_CATEGORIES](state: any, categories: any[]) {
+    state.categories = categories;
+  },
+  [GET_TAGS](state: any, tags: any[]) {
+    state.tags = tags;
   },
   [GET_INSPIRATIONS](state: any, inspirations: any[]) {
     state.inspirations = inspirations;

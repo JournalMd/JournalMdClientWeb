@@ -160,7 +160,7 @@ export default class Navbar extends Vue {
           },
           { icon: 'mdi-emoticon', text: 'views.mood', route: '/types/all?view=graph&viewsettings=%7B%22field%22%3A%22mood%22%7D' },
           { icon: 'mdi-run', text: 'views.weight', route: '/types/weight?view=graph&viewsettings=%7B%22field%22%3A%22weight%22%7D' },
-          { icon: 'mdi-heart', text: 'views.bucketList', route: '/types/goal?view=card-list&labels=12' },
+          { icon: 'mdi-heart', text: 'views.bucketList', route: '/types/goal?view=card-list&categories=14' },
         ],
       },
     ];

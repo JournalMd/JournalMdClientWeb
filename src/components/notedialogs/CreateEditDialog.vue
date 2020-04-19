@@ -27,11 +27,25 @@
 
               <v-col cols="12">
                 <v-autocomplete
-                  v-model="note.labels"
-                  :items="labels"
+                  v-model="note.categories"
+                  :items="categories"
                   item-text="title"
                   item-value="id"
-                  label="Label"
+                  label="Categories"
+                  multiple
+                  chips
+                  small-chips
+                  filled
+                ></v-autocomplete>
+              </v-col>
+
+              <v-col cols="12">
+                <v-autocomplete
+                  v-model="note.tags"
+                  :items="tags"
+                  item-text="title"
+                  item-value="id"
+                  label="Tags"
                   multiple
                   chips
                   small-chips
@@ -98,7 +112,9 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
 
   datemenu: boolean = false;
 
-  @notesModule.State labels: any;
+  @notesModule.State categories: any;
+
+  @notesModule.State tags: any;
 
   configs: {} = {
     spellChecker: false, // disable spell check

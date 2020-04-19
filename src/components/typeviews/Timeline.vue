@@ -36,7 +36,8 @@
               <MarkdownText :text="note.description" />
             </v-col>
             <v-col cols="12">
-              <LabelList :labels="note.labels" />
+              <CategoryList :categories="note.categories" />
+              <TagList :tags="note.tags" />
             </v-col>
           </v-row>
         </v-container>
@@ -57,10 +58,11 @@ import { Component, Mixins, Prop } from 'vue-property-decorator';
 import NoteTypesMixin from '@/mixins/note-types';
 import EmoticonsMixin from '@/mixins/emoticons';
 import MarkdownText from '@/components/MarkdownText.vue';
-import LabelList from '@/components/LabelList.vue';
+import CategoryList from '@/components/CategoryList.vue';
+import TagList from '@/components/TagList.vue';
 
 @Component({
-  components: { MarkdownText, LabelList },
+  components: { MarkdownText, CategoryList, TagList },
 })
 export default class Timeline extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];

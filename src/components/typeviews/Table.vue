@@ -24,8 +24,11 @@
       <template v-slot:item.createdAt="{ item }">
         {{ $d(item.createdAt, 'long') }}
       </template>
-      <template v-slot:item.labels="{ item }">
-        <LabelList :labels="item.labels" />
+      <template v-slot:item.categories="{ item }">
+        <CategoryList :categories="item.categories" />
+      </template>
+      <template v-slot:item.tags="{ item }">
+        <TagList :tags="item.tags" />
       </template>
       <template v-slot:item.action="{ item }">
         <v-icon small class="mr-2" @click="$emit('edit-note', item)">mdi-pencil</v-icon>
@@ -41,10 +44,11 @@ import { Component, Mixins, Prop } from 'vue-property-decorator';
 import _ from 'lodash';
 import NoteTypesMixin from '@/mixins/note-types';
 import EmoticonsMixin from '@/mixins/emoticons';
-import LabelList from '@/components/LabelList.vue';
+import CategoryList from '@/components/CategoryList.vue';
+import TagList from '@/components/TagList.vue';
 
 @Component({
-  components: { LabelList },
+  components: { CategoryList, TagList },
 })
 export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];
@@ -53,7 +57,9 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
 
   @Prop(Array) noteTypes!: any;
 
-  @Prop(Array) labels!: [];
+  @Prop(Array) categories!: [];
+
+  @Prop(Array) tags!: [];
 
   search: string = '';
 
@@ -64,7 +70,8 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
       // { text: 'Description', value: 'description', sortable: false }, // <MarkdownText :text="note.description" />
       { text: 'Mood', value: 'mood' },
       { text: 'Created', value: 'createdAt' },
-      { text: 'Labels', value: 'labels', sortable: false },
+      { text: 'Categories', value: 'categories', sortable: false },
+      { text: 'Tags', value: 'tags', sortable: false },
     ];
 
     const actionsHeader = [

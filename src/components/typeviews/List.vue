@@ -18,7 +18,8 @@
                   {{ noteTypes.find(sel => sel.id === note.typeId).name | typeicon }}
                 </v-icon>
                 <v-icon :color="note.mood | emoticoncolor">{{ note.mood | emoticonicon }}</v-icon>
-                <LabelList :labels="note.labels" />
+                <CategoryList :categories="note.categories" />
+                <TagList :tags="note.tags" />
               </v-list-item-subtitle>
             </v-list-item-content>
 
@@ -53,10 +54,11 @@ import { Component, Mixins, Prop } from 'vue-property-decorator';
 import NoteTypesMixin from '@/mixins/note-types';
 import EmoticonsMixin from '@/mixins/emoticons';
 import MarkdownText from '@/components/MarkdownText.vue';
-import LabelList from '@/components/LabelList.vue';
+import CategoryList from '@/components/CategoryList.vue';
+import TagList from '@/components/TagList.vue';
 
 @Component({
-  components: { MarkdownText, LabelList },
+  components: { MarkdownText, CategoryList, TagList },
 })
 export default class List extends Mixins(NoteTypesMixin, EmoticonsMixin) {
   @Prop(Array) notes!: any[];

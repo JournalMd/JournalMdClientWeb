@@ -30,7 +30,8 @@ export default class App extends Vue {
       if (authenticated) {
         this.$store.dispatch('user/getUser'); // TODO: handle elsewhere
         this.$store.dispatch('notes/getNoteTypes'); // TODO: handle elsewhere
-        this.$store.dispatch('notes/getLabels'); // TODO: handle elsewhere
+        this.$store.dispatch('notes/getCategories'); // TODO: handle elsewhere
+        this.$store.dispatch('notes/getTags'); // TODO: handle elsewhere
         this.$store.dispatch('notes/getInspirations'); // TODO: handle elsewhere
         this.$store.dispatch('notes/getNotes'); // TODO: handle elsewhere
       }
