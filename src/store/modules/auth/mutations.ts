@@ -18,6 +18,8 @@ export default {
     if (state.authenticated) {
       axiosAuthenticated.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('authToken')}`;
       EventBus.$emit(AUTHENTICATED, true);
+    } else {
+      EventBus.$emit(NAVIGATE, '/login');
     }
   },
 

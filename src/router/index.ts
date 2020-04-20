@@ -4,23 +4,12 @@ import store from '@/store';
 
 Vue.use(VueRouter);
 
-function requireAuth(to: Route, from: Route, next: any) {
-  if (!(store.state as any).auth.authenticated) {
-    next({
-      path: '/login',
-    });
-  } else {
-    next();
-  }
-}
-
 // Use webpackChunkName for route level code-splitting => lazy-loaded
 const routes = [
   {
     path: '/',
     name: 'dashboard',
     component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/login',
@@ -43,38 +32,32 @@ const routes = [
     path: '/test/:testParam',
     name: 'test',
     component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/fastentry',
     name: 'fastentry',
     component: () => import(/* webpackChunkName: "fastentry" */ '../views/FastEntry.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/entry',
     name: 'entry',
     component: () => import(/* webpackChunkName: "entry" */ '../views/Entry.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/types/:type',
     name: 'types',
     props: true,
     component: () => import(/* webpackChunkName: "overview" */ '../views/Overview.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/profile',
     name: 'userprofile',
     component: () => import(/* webpackChunkName: "userprofile" */ '../views/UserProfile.vue'),
-    beforeEnter: requireAuth,
   },
   {
     path: '/settings',
     name: 'usersettings',
     component: () => import(/* webpackChunkName: "usersettings" */ '../views/UserSettings.vue'),
-    beforeEnter: requireAuth,
   },
 ];
 

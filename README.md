@@ -56,6 +56,8 @@ Copy `src/models/swagger_tmp/model` to `src/models/`
 
 ## Resources used
 
+* Logo based on image by [Pettycon](https://pixabay.com/users/Pettycon-3307648/) from [Pixabay](https://pixabay.com/)
+
 * [Awesome Vue](https://github.com/vuejs/awesome-vue)
 * [Vue.js](https://vuejs.org/)
 * [Vuex](https://vuex.vuejs.org/)

@@ -52,15 +52,19 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-        <v-toolbar-title class="text-uppercase">JournalMd</v-toolbar-title>
+        <router-link to="/">
+          <v-img
+            alt="JournalMd Logo"
+            class="shrink mr-2"
+            contain
+            src="@/assets/logo.svg"
+            width="40"
+          />
+        </router-link>
+
+        <v-btn router to="/" text>
+          <v-toolbar-title>JournalMd</v-toolbar-title>
+        </v-btn>
       </div>
 
       <v-spacer></v-spacer>

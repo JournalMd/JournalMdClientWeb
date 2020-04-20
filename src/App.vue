@@ -37,6 +37,7 @@ export default class App extends Vue {
       }
     });
 
+    // Auth check will call AUTHENTICATED or NAVIGATE to login
     this.$store.dispatch('auth/check').then(() => {
       this.bootstrapping = false;
     });
