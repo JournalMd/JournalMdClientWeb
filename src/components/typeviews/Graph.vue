@@ -69,7 +69,6 @@ export default class Graph extends Mixins(NoteTypesMixin) {
     } else {
       this.chartType = this.viewSettings && this.viewSettings.type ? this.viewSettings.type : 'Line'; // Fields get line/timeSeries
     }
-    console.log(this.chartType);
 
     let labels: string[] = [];
     let series: any = [];
@@ -106,7 +105,6 @@ export default class Graph extends Mixins(NoteTypesMixin) {
         series: [series],
       };
     }
-    console.log(this.data);
   }
 
   get chartOptions() {

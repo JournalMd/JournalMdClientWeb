@@ -1,27 +1,48 @@
 # JournalMd ClientApp
 
 ## Project setup
-```
+
+```sh
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
-```
+
+```sh
 yarn serve
 ```
 
 ### Compiles and minifies for production
-```
+
+```sh
 yarn build
 ```
 
 ### Lints and fixes files
-```
+
+```sh
 yarn lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Docker
+
+### Build the container
+
+```sh
+docker build -t journalmd-frontend .
+```
+
+### Run the container
+
+```sh
+docker run -it -p 8000:80 --rm journalmd-frontend
+```
+
+Access the application on [localhost:8000](http://localhost:8000).
 
 ## Development
 

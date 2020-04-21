@@ -9,7 +9,6 @@ import * as types from './mutation-types';
 export const getNoteTypes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
   axiosAuthenticated.get('NoteTypes', {})
     .then((result) => {
-      console.log(result);
       const noteTypes = result.data.value;
       commit(types.GET_NOTE_TYPES, noteTypes);
     })
@@ -22,7 +21,6 @@ export const getNoteTypes = ({ commit, dispatch }: { commit: Commit, dispatch: D
 export const getCategories = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
   axiosAuthenticated.get('Categories', {})
     .then((result) => {
-      console.log(result);
       const categories = result.data.value;
       commit(types.GET_CATEGORIES, categories);
     })
@@ -35,7 +33,6 @@ export const getCategories = ({ commit, dispatch }: { commit: Commit, dispatch: 
 export const getTags = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
   axiosAuthenticated.get('Tags', {})
     .then((result) => {
-      console.log(result);
       const tags = result.data.value;
       commit(types.GET_TAGS, tags);
     })
@@ -59,7 +56,6 @@ export const getInspirations = ({ commit } : { commit: Commit}) => {
 export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
   axiosAuthenticated.get('Notes', {})
     .then((result) => {
-      console.log(result);
       const notes = result.data.value;
       commit(types.GET_NOTES, notes);
     })

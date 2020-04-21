@@ -121,7 +121,6 @@ export default class Test extends Vue {
 
   mounted() {
     this.increment();
-    console.log('this.$store.state.test.count', this.$store.state.test.count);
   }
 
   @dialogsModule.Action('addError') addErrorAction!: any;
