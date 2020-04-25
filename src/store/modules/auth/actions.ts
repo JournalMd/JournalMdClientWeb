@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Commit, Dispatch } from 'vuex';
-import { axiosAuthenticated, axiosUnauthenticated } from '../../../api/api';
+import { axiosUnauthenticated, errorToMessage } from '../../../api/api';
 import * as types from './mutation-types';
 
 export const check = ({ commit }: { commit: Commit }) => {
@@ -15,7 +15,7 @@ export const register = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
       commit(types.REGISTER, result.data.username);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.REGISTER_FAILED);
     });
 };
@@ -27,7 +27,7 @@ export const login = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch
       commit(types.LOGIN, result.data.token);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.LOGIN_FAILED);
     });
 };

@@ -23,3 +23,21 @@ axiosAuthenticated.defaults.headers.common.Authorization = `Bearer ${localStorag
 
 export const axiosUnauthenticated = axios.create({
 });
+
+export function errorToMessage(error: any): string {
+  const { data } = error.response;
+
+  if (Object.prototype.hasOwnProperty.call(data, 'message')) {
+    return data.message;
+  }
+
+  let errorMessage = data.title;
+  if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
+    Object.entries(data.errors).forEach((element) => {
+      console.log(element);
+      errorMessage = `${errorMessage} - ${element[0]}: ${element[1]}`;
+    });
+  }
+
+  return errorMessage;
+}

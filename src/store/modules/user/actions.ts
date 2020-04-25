@@ -1,6 +1,7 @@
 import { Commit, Dispatch } from 'vuex';
-import { axiosAuthenticated } from '@/api/api';
+import { axiosAuthenticated, errorToMessage } from '@/api/api';
 import { User } from '@/models/user';
+import VueI18n from '@/plugins/i18n';
 import * as types from './mutation-types';
 
 export const getUser = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }) => {
@@ -16,11 +17,39 @@ export const getUser = ({ commit, dispatch }: { commit: Commit, dispatch: Dispat
       commit(types.GET_USER, user);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.GET_USER_FAILED);
+    });
+};
+
+export const editUser = ({ commit, dispatch } : { commit: Commit, dispatch: Dispatch }, user: User) => {
+  axiosAuthenticated.put('Users', user)
+    .then((result) => { // 204 no content
+      commit(types.EDIT_USER, user);
+      dispatch('dialogs/addMessage', VueI18n.t('general.success'), { root: true });
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.EDIT_USER_FAILED);
+    });
+};
+
+export const changePassword = ({ commit, dispatch } : { commit: Commit, dispatch: Dispatch },
+  pwChange: { oldPassword: string, newPassword: string }) => {
+  axiosAuthenticated.put('Users/password', pwChange)
+    .then((result) => { // 204 no content
+      commit(types.CHANGE_PASSWORD);
+      dispatch('dialogs/addMessage', VueI18n.t('general.success'), { root: true });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.CHANGE_PASSWORD);
     });
 };
 
 export default {
   getUser,
+  editUser,
+  changePassword,
 };

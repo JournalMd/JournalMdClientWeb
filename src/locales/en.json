@@ -20,7 +20,8 @@
     "edited": "Edited",
     "deleted": "Deleted",
     
-    "save": "Save"
+    "save": "Save",
+    "success": "Successfully saved!"
   },
   "fields": {
     "title": "Title",

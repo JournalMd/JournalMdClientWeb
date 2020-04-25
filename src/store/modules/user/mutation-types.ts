@@ -1,7 +1,13 @@
 export const GET_USER = 'GET_USER';
 export const GET_USER_FAILED = 'GET_USER_FAILED';
+export const EDIT_USER = 'EDIT_USER';
+export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 export default {
   GET_USER,
   GET_USER_FAILED,
+  EDIT_USER,
+  EDIT_USER_FAILED,
+  CHANGE_PASSWORD,
 };

@@ -1,5 +1,5 @@
 import { Commit, Dispatch } from 'vuex';
-import { axiosAuthenticated } from '@/api/api';
+import { axiosAuthenticated, errorToMessage } from '@/api/api';
 import * as types from './mutation-types';
 
 // TODO
@@ -13,7 +13,7 @@ export const getNoteTypes = ({ commit, dispatch }: { commit: Commit, dispatch: D
       commit(types.GET_NOTE_TYPES, noteTypes);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.GET_NOTE_TYPES, []); // TODO ? _FAILED
     });
 };
@@ -25,7 +25,7 @@ export const getCategories = ({ commit, dispatch }: { commit: Commit, dispatch: 
       commit(types.GET_CATEGORIES, categories);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.GET_CATEGORIES, []); // TODO ? _FAILED
     });
 };
@@ -37,7 +37,7 @@ export const getTags = ({ commit, dispatch }: { commit: Commit, dispatch: Dispat
       commit(types.GET_TAGS, tags);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.GET_TAGS, []); // TODO ? _FAILED
     });
 };
@@ -60,7 +60,7 @@ export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
       commit(types.GET_NOTES, notes);
     })
     .catch((error) => {
-      dispatch('dialogs/addError', error.response.data.message, { root: true });
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.GET_NOTES, []); // TODO ? _FAILED
     });
 };
