@@ -25,8 +25,8 @@ export const getUser = ({ commit, dispatch }: { commit: Commit, dispatch: Dispat
 export const editUser = ({ commit, dispatch } : { commit: Commit, dispatch: Dispatch }, user: User) => {
   axiosAuthenticated.put('Users', user)
     .then((result) => { // 204 no content
-      commit(types.EDIT_USER, user);
       dispatch('dialogs/addMessage', VueI18n.t('general.success'), { root: true });
+      commit(types.EDIT_USER, user);
     })
     .catch((error) => {
       dispatch('dialogs/addError', errorToMessage(error), { root: true });
@@ -38,8 +38,8 @@ export const changePassword = ({ commit, dispatch } : { commit: Commit, dispatch
   pwChange: { oldPassword: string, newPassword: string }) => {
   axiosAuthenticated.put('Users/password', pwChange)
     .then((result) => { // 204 no content
-      commit(types.CHANGE_PASSWORD);
       dispatch('dialogs/addMessage', VueI18n.t('general.success'), { root: true });
+      commit(types.CHANGE_PASSWORD);
     })
     .catch((error) => {
       console.log(error);

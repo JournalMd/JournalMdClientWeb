@@ -1,5 +1,6 @@
 import { Commit, Dispatch } from 'vuex';
 import { axiosAuthenticated, errorToMessage } from '@/api/api';
+import VueI18n from '@/plugins/i18n';
 import * as types from './mutation-types';
 
 // TODO
@@ -68,16 +69,25 @@ export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
 export const createNote = ({ commit } : { commit: Commit}, note: any) => {
   // TODO api
   commit(types.CREATE_NOTE, note);
+  // CREATE_NOTE_FAILED,
 };
 
 export const editNote = ({ commit } : { commit: Commit}, note: any) => {
   // TODO api
   commit(types.EDIT_NOTE, note);
+  // EDIT_NOTE_FAILED,
 };
 
-export const deleteNote = ({ commit } : { commit: Commit}, id: number) => {
-  // TODO api
-  commit(types.DELETE_NOTE, id);
+export const deleteNote = ({ commit, dispatch } : { commit: Commit, dispatch: Dispatch }, id: number) => {
+  axiosAuthenticated.delete(`Notes/${id}`, {})
+    .then((result) => {
+      dispatch('dialogs/addMessage', VueI18n.t('general.success'), { root: true });
+      commit(types.DELETE_NOTE, id);
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.DELETE_NOTE_FAILED);
+    });
 };
 
 export default {

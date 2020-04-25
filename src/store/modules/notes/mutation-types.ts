@@ -5,8 +5,11 @@ export const GET_INSPIRATIONS = 'GET_INSPIRATIONS';
 
 export const GET_NOTES = 'GET_NOTES';
 export const CREATE_NOTE = 'CREATE_NOTE';
+export const CREATE_NOTE_FAILED = 'CREATE_NOTE_FAILED';
 export const EDIT_NOTE = 'EDIT_NOTE';
+export const EDIT_NOTE_FAILED = 'EDIT_NOTE_FAILED';
 export const DELETE_NOTE = 'DELETE_NOTE';
+export const DELETE_NOTE_FAILED = 'DELETE_NOTE_FAILED';
 
 export default {
   GET_NOTE_TYPES,
@@ -15,6 +18,9 @@ export default {
   GET_INSPIRATIONS,
   GET_NOTES,
   CREATE_NOTE,
+  CREATE_NOTE_FAILED,
   EDIT_NOTE,
+  EDIT_NOTE_FAILED,
   DELETE_NOTE,
+  DELETE_NOTE_FAILED,
 };
