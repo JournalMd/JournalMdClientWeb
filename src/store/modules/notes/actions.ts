@@ -66,16 +66,31 @@ export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
     });
 };
 
-export const createNote = ({ commit } : { commit: Commit}, note: any) => {
-  // TODO api
-  commit(types.CREATE_NOTE, note);
-  // CREATE_NOTE_FAILED,
+export const createNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
+  axiosAuthenticated.post('Notes', note)
+    .then((result) => {
+      dispatch('dialogs/addMessage', VueI18n.t('general.created'), { root: true });
+      dispatch('dialogs/createNote', null, { root: true }); // "close" dialog
+      const createdNote = result.data;
+      commit(types.CREATE_NOTE, createdNote);
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.CREATE_NOTE_FAILED);
+    });
 };
 
-export const editNote = ({ commit } : { commit: Commit}, note: any) => {
-  // TODO api
-  commit(types.EDIT_NOTE, note);
-  // EDIT_NOTE_FAILED,
+export const editNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
+  axiosAuthenticated.put(`Notes/${note.id}`, note)
+    .then((result) => { // 204 no content
+      dispatch('dialogs/addMessage', VueI18n.t('general.edited'), { root: true });
+      dispatch('dialogs/editNote', null, { root: true }); // "close" dialog
+      commit(types.EDIT_NOTE, note);
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.EDIT_NOTE_FAILED);
+    });
 };
 
 export const deleteNote = ({ commit, dispatch } : { commit: Commit, dispatch: Dispatch }, id: number) => {

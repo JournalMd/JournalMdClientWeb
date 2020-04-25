@@ -20,6 +20,8 @@
                 <vue-easymde v-model="note.description" ref="markdownEditor" :configs="configs" />
               </v-col>
 
+              {{ /* TODO date */ }}
+
               <v-col cols="12" v-if="type.noteDescriptionShort">
                 <v-text-field v-model="note.description" :label="$t('fields.description')" filled
                   :rules="[rules.required, rules.min3]"></v-text-field>
@@ -186,14 +188,10 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
       if (this.$store.state.dialogs.createNote != null) {
         this.createNoteAction(this.note).then(() => {
           this.loading = false;
-          this.dialog = false;
-          this.addMessageAction(this.$t('general.created'));
         });
       } else {
         this.editNoteAction(this.note).then(() => {
           this.loading = false;
-          this.dialog = false;
-          this.addMessageAction(this.$t('general.edited'));
         });
       }
     }

@@ -44,8 +44,8 @@ export default {
     state.notes = notes;
   },
   [CREATE_NOTE](state: any, note: any) {
-    /* eslint-disable no-param-reassign */
-    note.id = state.notes.length + 1;
+    // eslint-disable-next-line no-param-reassign
+    note.date = new Date(note.date);
     state.notes = [note, ...state.notes];
   },
   [CREATE_NOTE_FAILED](state: any) {
