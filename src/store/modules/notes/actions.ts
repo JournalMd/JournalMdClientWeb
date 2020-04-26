@@ -100,10 +100,11 @@ export const editNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
     });
   });
   axiosAuthenticated.put(`Notes/${note.id}`, note)
-    .then((result) => { // 204 no content
+    .then((result) => {
       dispatch('dialogs/addMessage', VueI18n.t('general.edited'), { root: true });
       dispatch('dialogs/editNote', null, { root: true }); // "close" dialog
-      commit(types.EDIT_NOTE, note);
+      const editedNote = result.data;
+      commit(types.EDIT_NOTE, editedNote);
     })
     .catch((error) => {
       dispatch('dialogs/addError', errorToMessage(error), { root: true });
