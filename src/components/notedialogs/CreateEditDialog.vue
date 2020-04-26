@@ -20,7 +20,15 @@
                 <vue-easymde v-model="note.description" ref="markdownEditor" :configs="configs" />
               </v-col>
 
-              {{ /* TODO date */ }}
+              <v-col cols="12">
+                <v-menu v-model="datemenu" :close-on-content-click="false"
+                        :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
+                  <template v-slot:activator="{ on }">
+                    <v-text-field v-model="note.date" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" />
+                  </template>
+                  <v-date-picker v-model="note.date" @input="datemenu = false"></v-date-picker>
+                </v-menu>
+              </v-col>
 
               <v-col cols="12" v-if="type.noteDescriptionShort">
                 <v-text-field v-model="note.description" :label="$t('fields.description')" filled
@@ -64,13 +72,12 @@
                 <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.id].value" :label="field.title"
                               filled :rules="[rules.number, rules.required]"></v-text-field>
                 <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.id].value" :label="field.title"></v-checkbox>
-                <v-menu v-if="field.type === 'date'" v-model="datemenu" :close-on-content-click="false" :nudge-right="40"
-                        transition="scale-transition" offset-y min-width="290px">
+                <v-menu v-if="field.type === 'date' || field.type === 'datetime'" v-model="datefieldmenu" :close-on-content-click="false"
+                        :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
-                    <v-text-field v-model="note.fields[field.id].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on">
-                    </v-text-field>
+                    <v-text-field v-model="note.fields[field.id].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" />
                   </template>
-                  <v-date-picker v-model="note.fields[field.id].value" @input="datemenu = false"></v-date-picker>
+                  <v-date-picker v-model="note.fields[field.id].value" @input="datefieldmenu = false"></v-date-picker>
                 </v-menu>
               </v-col>
             </v-row>
@@ -119,6 +126,8 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
 
   datemenu: boolean = false;
 
+  datefieldmenu: boolean = false;
+
   @notesModule.State categories: any;
 
   @notesModule.State tags: any;
@@ -162,6 +171,7 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
         mood: 3,
         noteTypeId: this.$store.state.dialogs.createNote.id,
         fields: noteFields,
+        date: (new Date()).toISOString().split('T')[0],
       };
     } // else - won't show anyway
 

@@ -67,6 +67,15 @@ export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
 };
 
 export const createNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
+  // eslint-disable-next-line no-param-reassign
+  note.noteValues = [];
+  Object.entries(note.fields).forEach((element: any) => {
+    note.noteValues.push({
+      value: element[1].value.toString(),
+      noteFieldId: element[1].fieldId,
+    });
+  });
+
   axiosAuthenticated.post('Notes', note)
     .then((result) => {
       dispatch('dialogs/addMessage', VueI18n.t('general.created'), { root: true });
@@ -81,6 +90,15 @@ export const createNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dis
 };
 
 export const editNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
+  console.log(note);
+  // eslint-disable-next-line no-param-reassign
+  note.noteValues = [];
+  Object.entries(note.fields).forEach((element: any) => {
+    note.noteValues.push({
+      value: element[1].value.toString(),
+      noteFieldId: element[1].noteFieldId,
+    });
+  });
   axiosAuthenticated.put(`Notes/${note.id}`, note)
     .then((result) => { // 204 no content
       dispatch('dialogs/addMessage', VueI18n.t('general.edited'), { root: true });

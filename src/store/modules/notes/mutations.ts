@@ -44,9 +44,14 @@ export default {
     state.notes = notes;
   },
   [CREATE_NOTE](state: any, note: any) {
-    // eslint-disable-next-line no-param-reassign
+    /* eslint-disable no-param-reassign */
     note.date = new Date(note.date);
+    note.fields = {};
+    note.noteValues.forEach((nv: any) => {
+      note.fields[nv.noteFieldId] = nv;
+    });
     state.notes = [note, ...state.notes];
+    /* eslint-enable no-param-reassign */
   },
   [CREATE_NOTE_FAILED](state: any) {
   },
@@ -56,7 +61,14 @@ export default {
       note,
     ]; */
     // keep order
+    /* eslint-disable no-param-reassign */
+    note.date = new Date(note.date);
+    note.fields = {};
+    note.noteValues.forEach((nv: any) => {
+      note.fields[nv.noteFieldId] = nv;
+    });
     state.notes = [...state.notes.map((fNote: { id: any; }) => (fNote.id !== note.id ? fNote : { ...fNote, ...note }))];
+    /* eslint-enable no-param-reassign */
   },
   [EDIT_NOTE_FAILED](state: any) {
   },
