@@ -9,10 +9,10 @@
       <v-col cols="12" md="8">
         <v-row>
           <v-col cols="12" md="6">
-            <BaseCard class="row1height">TODO Schnellerfassung</BaseCard>
+            <BaseCard class="row1height"><EntryList small /></BaseCard>
           </v-col>
           <v-col cols="12" md="6">
-            <BaseCard class="row1height"><EntryList small /></BaseCard>
+            <BaseCard class="row1height">TODO Schnellerfassung</BaseCard>
           </v-col>
         </v-row>
         <v-row>

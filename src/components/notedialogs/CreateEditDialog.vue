@@ -149,7 +149,7 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
 
   get mode() {
     if (this.$store.state.dialogs.editNote !== null) {
-      this.note = this.$store.state.dialogs.editNote;
+      this.note = JSON.parse(JSON.stringify(this.$store.state.dialogs.editNote)); // clone - don't work on store object!
       this.type = this.getTypeById(this.note.noteTypeId);
     } else if (this.$store.state.dialogs.createNote !== null) {
       this.type = this.$store.state.dialogs.createNote;

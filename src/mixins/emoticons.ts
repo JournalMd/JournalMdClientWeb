@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { emoticoncolor, emoticonicon } from '@/helper/emoticonConveters';
+import { emoticoncolor, emoticonicon } from '@/helper/emoticonConverters';
 
 @Component({
   filters: {

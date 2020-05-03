@@ -90,7 +90,6 @@ export const createNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dis
 };
 
 export const editNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
-  console.log(note);
   // eslint-disable-next-line no-param-reassign
   note.noteValues = [];
   Object.entries(note.fields).forEach((element: any) => {

@@ -13,6 +13,7 @@ export function typeicon(value: string | number | null): string {
     case 'routine': return 'mdi-autorenew';
     case 'weightmeasurement': return 'mdi-scale-bathroom';
     case 'bodymeasurement': return 'mdi-human-handsdown';
+    case 'project': return 'mdi-format-list-checks';
     default: return 'mdi-crosshairs-question';
   }
 }
@@ -31,6 +32,7 @@ export function typecolor(value: string | null): string {
     case 'routine': return 'brown darken-1';
     case 'weightmeasurement': return 'purple darken-1';
     case 'bodymeasurement': return 'pink darken-1';
+    case 'project': return 'yellow darken-1';
     default: return 'gray darken-1';
   }
 }

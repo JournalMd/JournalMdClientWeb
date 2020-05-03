@@ -20,7 +20,7 @@ import {
 import { mapState } from 'vuex';
 import { State, namespace } from 'vuex-class';
 import EmoticonsMixin from '@/mixins/emoticons';
-import { emoticoncolor, emoticonicon } from '@/helper/emoticonConveters';
+import { emoticoncolor, emoticonicon } from '@/helper/emoticonConverters';
 
 const notesModule = namespace('notes');
 

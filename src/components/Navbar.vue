@@ -144,6 +144,7 @@ export default class Navbar extends Vue {
           { icon: 'mdi-view-list', text: 'views.overview', route: '/types/all?view=timeline' },
           { icon: 'mdi-note-text', text: 'views.notes', route: '/types/note' },
           { icon: 'mdi-check-box-outline', text: 'views.tasks', route: '/types/task' },
+          { icon: 'mdi-format-list-checks', text: 'views.projects', route: '/types/project' },
           { icon: 'mdi-bullseye-arrow', text: 'views.goals', route: '/types/goal' },
           { icon: 'mdi-script-text', text: 'views.journal', route: '/types/journal' },
           { icon: 'mdi-run', text: 'views.activities', route: '/types/activity' },
