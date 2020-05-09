@@ -65,7 +65,9 @@
                   chips
                   small-chips
                   filled
-                ></v-autocomplete>
+                >
+                  <v-icon slot="append-outer" color="green" @click="addTag">mdi-plus</v-icon>
+                </v-autocomplete>
               </v-col>
 
               <v-col cols="12" v-for="field in type.noteFields" :key="field.id">
@@ -90,6 +92,8 @@
         <v-btn color="green darken-1" text @click="submit" :loading="loading">{{ $t(`general.${mode}`) }}</v-btn>
       </v-card-actions>
     </v-card>
+
+    <AddTagDialog :dialog.sync="dialogAddTag" />
   </v-dialog>
 </template>
 
@@ -108,15 +112,18 @@ import _ from 'lodash';
 import VueEasymde from 'vue-easymde';
 import NoteTypesMixin from '@/mixins/note-types';
 import EmoticonRating from '@/components/EmoticonRating.vue';
+import AddTagDialog from './AddTagDialog.vue';
 
 const notesModule = namespace('notes');
 const dialogsModule = namespace('dialogs');
 
 @Component({
-  components: { EmoticonRating, VueEasymde },
+  components: { EmoticonRating, VueEasymde, AddTagDialog },
 })
 export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
   dialog: boolean = false;
+
+  dialogAddTag: boolean = false;
 
   note: any = {};
 
@@ -205,6 +212,11 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
         });
       }
     }
+  }
+
+  addTag() {
+    console.log('3');
+    this.dialogAddTag = true;
   }
 
   @dialogsModule.Action('createNote') dialogsCreateNoteAction: any;

@@ -43,11 +43,26 @@ export const getTags = ({ commit, dispatch }: { commit: Commit, dispatch: Dispat
     });
 };
 
+export const createTag = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, tagTitle: string) => {
+  console.log('createTag', tagTitle);
+
+  axiosAuthenticated.post('Tags', { title: tagTitle })
+    .then((result) => {
+      dispatch('dialogs/addMessage', VueI18n.t('general.created'), { root: true });
+      const createdTag = result.data;
+      commit(types.CREATE_TAG, createdTag);
+    })
+    .catch((error) => {
+      dispatch('dialogs/addError', errorToMessage(error), { root: true });
+      commit(types.CREATE_TAG_FAILED);
+    });
+};
+
 /* eslint-disable object-curly-newline, max-len, object-property-newline */ // Allow test data onliner
 export const getInspirations = ({ commit } : { commit: Commit}) => {
   const inspirations: any[] = [ // TODO strongly type
-    { id: 1, type: 'journal', title: 'Journal Inspiration #1', description: 'Write one.' },
-    { id: 2, type: 'journal', title: 'Journal Inspiration #2', description: 'Write every day.' },
+    { id: 1, type: 'journal', title: 'Journal Inspiration #1', description: 'TODO Write one.' },
+    { id: 2, type: 'journal', title: 'Journal Inspiration #2', description: 'TODO Write every day.' },
     { id: 3, type: 'journal', title: 'Journal Inspiration #3', description: 'TODO ich muss mir echt mehr Beispiele einfallen lassen...' },
   ];
 
@@ -68,7 +83,7 @@ export const getNotes = ({ commit, dispatch }: { commit: Commit, dispatch: Dispa
 
 export const createNote = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, note: any) => {
   // eslint-disable-next-line no-param-reassign
-  note.noteValues = [];
+  note.noteValues = []; // create values array [{ value: "a", noteFieldId: 1 }, { value: "b", noteFieldId: 2 },]
   Object.entries(note.fields).forEach((element: any) => {
     note.noteValues.push({
       value: element[1].value.toString(),
@@ -127,6 +142,7 @@ export default {
   getNoteTypes,
   getCategories,
   getTags,
+  createTag,
   getInspirations,
   getNotes,
   createNote,

@@ -1,7 +1,12 @@
 export const GET_NOTE_TYPES = 'GET_NOTE_TYPES';
+
 export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_TAGS = 'GET_TAGS';
+
 export const GET_INSPIRATIONS = 'GET_INSPIRATIONS';
+
+export const GET_TAGS = 'GET_TAGS';
+export const CREATE_TAG = 'CREATE_TAG';
+export const CREATE_TAG_FAILED = 'CREATE_TAG_FAILED';
 
 export const GET_NOTES = 'GET_NOTES';
 export const CREATE_NOTE = 'CREATE_NOTE';
@@ -15,6 +20,8 @@ export default {
   GET_NOTE_TYPES,
   GET_CATEGORIES,
   GET_TAGS,
+  CREATE_TAG,
+  CREATE_TAG_FAILED,
   GET_INSPIRATIONS,
   GET_NOTES,
   CREATE_NOTE,

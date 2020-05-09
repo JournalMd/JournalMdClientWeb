@@ -2,6 +2,8 @@ import {
   GET_NOTE_TYPES,
   GET_CATEGORIES,
   GET_TAGS,
+  CREATE_TAG,
+  CREATE_TAG_FAILED,
   GET_INSPIRATIONS,
   GET_NOTES,
   CREATE_NOTE,
@@ -27,6 +29,11 @@ export default {
   },
   [GET_TAGS](state: any, tags: any[]) {
     state.tags = tags;
+  },
+  [CREATE_TAG](state: any, tag: any) {
+    state.tags = [tag, ...state.tags];
+  },
+  [CREATE_TAG_FAILED](state: any) {
   },
   [GET_INSPIRATIONS](state: any, inspirations: any[]) {
     state.inspirations = inspirations;
