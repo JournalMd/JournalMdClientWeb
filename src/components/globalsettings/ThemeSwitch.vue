@@ -15,6 +15,7 @@ export default class ThemeSwitch extends Vue {
   }
 
   set toggleDarkTheme(val: boolean) {
+    localStorage.setItem('darkTheme', val.toString());
     this.$vuetify.theme.dark = val;
   }
 }

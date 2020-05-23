@@ -41,7 +41,7 @@ export default {
   [GET_NOTES](state: any, notes: any[]) {
     /* eslint-disable no-param-reassign */
     notes.forEach((value) => {
-      value.date = new Date(value.date);
+      value.date = new Date(`${value.date}Z`); // saved as local but api misses Z
       value.fields = {};
       value.noteValues.forEach((nv: any) => {
         value.fields[nv.noteFieldId] = nv;

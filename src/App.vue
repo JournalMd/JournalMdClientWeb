@@ -23,7 +23,23 @@ export default class App extends Vue {
   bootstrapping: boolean = true;
 
   created() {
-    this.$vuetify.theme.dark = false;
+    // Parse params in order:
+    // 1. Use localStorage as the user decided for language and theme already
+    // TODO 2. Use user proifle from DB
+    // 3. Try to find a good value
+    // 4. Rely on default
+    if (localStorage.getItem('darkTheme')) {
+      this.$vuetify.theme.dark = localStorage.getItem('darkTheme') === 'true';
+    } else {
+      this.$vuetify.theme.dark = false;
+    }
+
+    if (localStorage.getItem('locale')) {
+      const locale = localStorage.getItem('locale');
+      this.$root.$i18n.locale = locale != null ? locale : 'en'; // Typescript wants to have the long version...
+    } else if (window.navigator.language.slice(0, 2) === 'de') {
+      this.$root.$i18n.locale = 'de';
+    }
 
     EventBus.$on(NAVIGATE, (route: string) => { this.$router.push(route); });
     EventBus.$on(AUTHENTICATED, (authenticated: boolean) => {

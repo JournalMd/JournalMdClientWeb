@@ -1,6 +1,6 @@
 <template>
   <div class="locale-changer">
-    <v-select :items="langs" v-model="$root.$i18n.locale" :label="$t('general.language')" prepend-icon="mdi-flag"></v-select>
+    <v-select :items="langs" v-model="$root.$i18n.locale" :label="$t('general.language')" prepend-icon="mdi-flag" @change="updateStore" />
   </div>
 </template>
 
@@ -14,5 +14,10 @@ export default class LocaleChanger extends Vue {
     { value: 'en', text: 'English' },
     { value: 'de', text: 'Deutsch' },
   ];
+
+  // eslint-disable-next-line class-methods-use-this
+  updateStore(locale: string) {
+    localStorage.setItem('locale', locale);
+  }
 }
 </script>
