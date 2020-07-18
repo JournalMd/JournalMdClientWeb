@@ -41,8 +41,7 @@
               </v-col>
 
               <v-col cols="12" v-if="type.noteDescriptionShort">
-                <v-text-field v-model="note.description" :label="$t('fields.description')" filled
-                  :rules="[rules.required, rules.min3]"></v-text-field>
+                <v-text-field v-model="note.description" :label="$t('fields.description')" filled></v-text-field>
               </v-col>
 
               <v-col cols="12">
@@ -238,7 +237,6 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
   }
 
   addTag() {
-    console.log('3');
     this.dialogAddTag = true;
   }
 

@@ -1,18 +1,18 @@
 <template>
   <v-container fill-height>
-    <v-row>
+    <!-- <v-row>
       <v-col cols="12">
         <h1>{{ $t('views.dashboard') }}</h1>
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row>
       <v-col cols="12" md="8">
         <v-row>
           <v-col cols="12" md="6">
-            <BaseCard class="row1height"><EntryList small /></BaseCard>
+            <BaseCard class="row1height">{{ $t('welcome') }}<br />{{ $d(new Date(), 'short') }}</BaseCard>
           </v-col>
           <v-col cols="12" md="6">
-            <BaseCard class="row1height">TODO Schnellerfassung</BaseCard>
+            <BaseCard class="row1height"><EntryList small /></BaseCard>
           </v-col>
         </v-row>
         <v-row>
@@ -43,62 +43,6 @@
     <v-row>
       <v-col cols="12">
         <TypeViewWrapper viewType="card-list" :notes="getNotesByType('all')" :maxItems=6 :filterTypes="[4]" />
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        <h1>{{ $t('views.dashboard') }} - !!! VIEW TESTS 1 !!!</h1>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="table" :notes="getNotesByType('all')" compact />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="list" :notes="getNotesByType('all')" compact />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="timeline-small" :notes="getNotesByType('all')" compact />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="card-list" :notes="getNotesByType('all')" compact />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="graph" :notes="getNotesByType('all')" compact />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="timeline" :notes="getNotesByType('all')" compact  />
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        <h1>{{ $t('views.dashboard') }} - !!! VIEW TESTS 2 !!!</h1>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="table" :notes="getNotesByType('all')" />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="list" :notes="getNotesByType('all')" />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="timeline-small" :notes="getNotesByType('all')" />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="card-list" :notes="getNotesByType('all')" />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="graph" :notes="getNotesByType('all')" :viewSettings="{'type':'Pie'}" />
-      </v-col>
-      <v-col cols="12" md="4">
-        <TypeViewWrapper viewType="timeline" :notes="getNotesByType('all')"  />
       </v-col>
     </v-row>
   </v-container>

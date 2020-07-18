@@ -4,11 +4,11 @@
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+            <v-icon>mdi-account</v-icon>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>{{ user.firstName }} {{ user.lastName }}</v-list-item-title>
-            <v-list-item-subtitle>Premium User</v-list-item-subtitle>
+            <v-list-item-title>{{ user.firstName }}<!-- {{ user.lastName }}--></v-list-item-title>
+            <v-list-item-subtitle><!--Premium User--></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -130,8 +130,7 @@ export default class Navbar extends Vue {
 
     links: { icon: string, text: string, route: string}[] = [
       { icon: 'mdi-view-dashboard', text: 'views.dashboard', route: '/' },
-      { icon: 'mdi-test-tube', text: 'test.test', route: '/test/12345678?queryParam=test-value' }, // TEST!!!!!
-      { icon: 'mdi-console-line', text: 'views.fastEntry', route: '/fastentry' },
+      // { icon: 'mdi-test-tube', text: 'test.test', route: '/test/12345678?queryParam=test-value' }, // TEST!!!!!
       { icon: 'mdi-card-text', text: 'views.entry', route: '/entry' },
     ];
 

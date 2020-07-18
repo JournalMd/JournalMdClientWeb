@@ -34,11 +34,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue'),
   },
   {
-    path: '/fastentry',
-    name: 'fastentry',
-    component: () => import(/* webpackChunkName: "fastentry" */ '../views/FastEntry.vue'),
-  },
-  {
     path: '/entry',
     name: 'entry',
     component: () => import(/* webpackChunkName: "entry" */ '../views/Entry.vue'),
