@@ -2,7 +2,7 @@ import axios from 'axios';
 import EventBus from '@/helper/eventBus';
 import { NAVIGATE } from '@/helper/event-bus-types';
 
-axios.defaults.baseURL = process.env.JOURNALMD_API_LOCATION;
+axios.defaults.baseURL = process.env.VUE_APP_JOURNALMD_API_LOCATION;
 axios.defaults.headers.common.Accept = 'application/json';
 // axios.defaults.headers.common['Accept-Language'] = 'de-DE,de;q=0.9,en-DE;q=0.8,en;q=0.7,en-US;q=0.6';
 
