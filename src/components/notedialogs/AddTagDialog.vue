@@ -45,7 +45,6 @@ export default class AddTagDialog extends Vue {
   submit() {
     const atForm = this.$refs.atform; // super uggly typescript workaround
     if (atForm != null && (atForm as any).validate()) {
-      console.log('createTag1 ', this.tag);
       this.loading = true;
       this.createTagAction(this.tag).then(() => {
         this.loading = false;

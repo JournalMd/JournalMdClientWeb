@@ -34,7 +34,6 @@ export function errorToMessage(error: any): string {
   let errorMessage = data.title;
   if (Object.prototype.hasOwnProperty.call(data, 'errors')) {
     Object.entries(data.errors).forEach((element) => {
-      console.log(element);
       errorMessage = `${errorMessage} - ${element[0]}: ${element[1]}`;
     });
   }

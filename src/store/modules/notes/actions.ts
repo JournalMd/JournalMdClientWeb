@@ -44,8 +44,6 @@ export const getTags = ({ commit, dispatch }: { commit: Commit, dispatch: Dispat
 };
 
 export const createTag = ({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, tagTitle: string) => {
-  console.log('createTag', tagTitle);
-
   axiosAuthenticated.post('Tags', { title: tagTitle })
     .then((result) => {
       dispatch('dialogs/addMessage', VueI18n.t('general.created'), { root: true });

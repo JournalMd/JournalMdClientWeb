@@ -114,7 +114,6 @@ export default class UserProfile extends Vue {
   @dialogsModule.Action('addMessage') addMessageAction!: any;
 
   mounted() {
-    console.log(this.user);
     this.editUser = this.user;
   }
 

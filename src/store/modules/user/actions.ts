@@ -42,7 +42,6 @@ export const changePassword = ({ commit, dispatch } : { commit: Commit, dispatch
       commit(types.CHANGE_PASSWORD);
     })
     .catch((error) => {
-      console.log(error);
       dispatch('dialogs/addError', errorToMessage(error), { root: true });
       commit(types.CHANGE_PASSWORD);
     });
