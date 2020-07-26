@@ -63,6 +63,7 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
 
   search: string = '';
 
+  // TODO: Translate
   get headers() {
     const typeHeader = [
       { text: 'Type', value: 'noteTypeId' },
@@ -83,7 +84,7 @@ export default class Table extends Mixins(NoteTypesMixin, EmoticonsMixin) {
 
     // If multiple node types are shown then only return the base header without fields
     const noteTypes = this.notes.map(sel => sel.noteTypeId);
-    if (noteTypes == null || _.uniq(noteTypes).length > 1) {
+    if (noteTypes == null || noteTypes[0] === undefined /* filter tags/cat empty result */ || _.uniq(noteTypes).length > 1) {
       return [...typeHeader, ...baseHeader, ...actionsHeader];
     }
 

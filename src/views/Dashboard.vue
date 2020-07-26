@@ -28,7 +28,7 @@
             <TypeViewWrapper viewType="graph" :notes="getNotesByType('all')" compact class="row2height" :viewSettings="{'type':'Pie'}" />
           </v-col>
           <v-col cols="12" md="6">
-            <Inspiration class="row2height" />
+            <!-- <Inspiration class="row2height" /> -->
           </v-col>
         </v-row>
       </v-col>

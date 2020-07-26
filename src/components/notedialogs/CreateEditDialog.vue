@@ -55,7 +55,7 @@
                   :items="categories"
                   item-text="title"
                   item-value="id"
-                  label="Categories"
+                  :label="$t('fields.categories')"
                   multiple
                   chips
                   small-chips
@@ -69,7 +69,7 @@
                   :items="tags"
                   item-text="title"
                   item-value="id"
-                  label="Tags"
+                  :label="$t('fields.tags')"
                   multiple
                   chips
                   small-chips

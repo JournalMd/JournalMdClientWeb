@@ -20,6 +20,10 @@
   .ct-series-c .ct-slice-pie { fill: #6D4C41; }
   .ct-series-d .ct-slice-pie { fill: #43A047; }
   .ct-series-e .ct-slice-pie { fill: #1E88E5; }
+
+  // Dark Theme specific but [theme=dark] does not work
+  .theme--dark.v-application .ct-label { color: rgba(255, 255, 255, 0.4); }
+  .theme--dark.v-application .ct-grid { stroke: rgba(255, 255, 255, 0.2); }
 </style>
 
 <script lang="ts">
@@ -56,7 +60,7 @@ export default class Graph extends Mixins(NoteTypesMixin) {
     this.updateData();
   }
 
-  @Watch('viewSettings')
+  @Watch('viewSettings', { deep: true })
   onSettingsChange() {
     this.updateData();
   }

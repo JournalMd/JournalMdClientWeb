@@ -27,7 +27,13 @@
     "title": "Titel",
     "description": "Beschreibung",
     "email": "E-Mail",
-    "password": "Passwort"
+    "password": "Passwort",
+    "categories": "Kategorie",
+    "tags": "Tag",
+    "viewtype": "Ansicht",
+    "nodetype": "Typ",
+    "field": "Feld",
+    "graph": "Graph"
   },
   "views": {
     "profile": "Profil",
