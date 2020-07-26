@@ -31,7 +31,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Prop, Mixins } from 'vue-property-decorator';
+import {
+  Component, Mixins, Prop, Watch,
+} from 'vue-property-decorator';
 import { State, namespace } from 'vuex-class';
 import NoteTypesMixin from '@/mixins/note-types';
 import orderBy from 'lodash/orderBy';
@@ -52,6 +54,11 @@ export default class EntryList extends Mixins(NoteTypesMixin) {
   noteTypesOrdered: any[] = [];
 
   mounted() {
+    this.onNoteTypesChange(); // Ensure data on create
+  }
+
+  @Watch('noteTypes') // Ensure data on reload
+  onNoteTypesChange() {
     this.noteTypesOrdered = orderBy(this.noteTypes, 'order', 'asc');
   }
 
