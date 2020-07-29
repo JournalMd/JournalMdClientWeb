@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <Navbar v-if="!bootstrapping" />
-    <v-content v-if="!bootstrapping">
+    <v-main v-if="!bootstrapping">
       <GlobalDialogs ref="globalDialogs" />
       <router-view/>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -25,7 +25,7 @@ export default class App extends Vue {
   created() {
     // Parse params in order:
     // 1. Use localStorage as the user decided for language and theme already
-    // TODO 2. Use user proifle from DB
+    // TODO 2. Use user profile from DB
     // 3. Try to find a good value
     // 4. Rely on default
     if (localStorage.getItem('darkTheme')) {

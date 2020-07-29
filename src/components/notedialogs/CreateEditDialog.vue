@@ -119,6 +119,7 @@ import { State, Getter, namespace } from 'vuex-class';
 import _ from 'lodash';
 // eslint-disable-next-line import/extensions
 import VueEasymde from 'vue-easymde';
+import VueI18n from '@/plugins/i18n';
 import NoteTypesMixin from '@/mixins/note-types';
 import EmoticonRating from '@/components/EmoticonRating.vue';
 import AddTagDialog from './AddTagDialog.vue';
@@ -158,9 +159,9 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
   }
 
   rules: any = {
-    required: (value: any) => !!value || 'Required.',
-    min3: (value: any) => value.length >= 3 || 'Min 3 characters.',
-    number: (value: any) => (_.isFinite(_.toNumber(value.replace(',', '.'))) || value === '') || 'Not a valid number',
+    required: (value: any) => !!value || VueI18n.t('validate.required'),
+    min3: (value: any) => value.length >= 3 || VueI18n.t('validate.minchars', [3]),
+    number: (value: any) => (_.isFinite(_.toNumber(value.replace(',', '.'))) || value === '') || VueI18n.t('validate.num'),
   };
 
   @notesModule.Getter getTypeById: any;
@@ -251,6 +252,14 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
     }
     if (this.$store.state.dialogs.editNote != null && newValue === false) {
       this.dialogsEditNoteAction(null); // reset "current" selection to null to allow reopening the dialog
+    }
+
+    // Scroll to dialog top on close. Scroll on open does not work here as the dialog is not "active" yet
+    if (newValue === false) {
+      const activeDialog = document.getElementsByClassName('v-dialog--active')[0];
+      if (activeDialog !== undefined) {
+        activeDialog.scrollTop = 0;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h1>{{ $t('welcome') }}</h1>
+        <h1>{{ $t('globaltest') }}</h1>
       </v-col>
       <v-col cols="12">
         <BaseCard>
@@ -25,7 +25,7 @@
       <v-col cols="12">
         <BaseCard title="i18n">
           <div><LocaleChanger class="maxWidth" /></div>
-          <div><strong>Welcome:</strong> {{ $t('test.welcome') }}</div>
+          <div><strong>Welcome:</strong> {{ $t('welcome.title') }}</div>
           <div><strong>{0} Text:</strong> {{ $t('test.hello', ['hello']) }}</div>
           <div><strong>Count 0:</strong> {{ $tc('test.apple', 0) }}</div>
           <div><strong>Count 1:</strong> {{ $tc('test.apple', 1) }}</div>

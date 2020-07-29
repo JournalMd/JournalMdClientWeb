@@ -1,10 +1,14 @@
 {
-  "welcome": "Willkommen!",
+  "globaltest": "Globaler Test!",
   "test": {
     "test": "Test",
-    "welcome": "test.Willkommen!",
     "hello": "{0} Welt",
     "apple": "kein Apfel | ein Apfel | {count} Äpfel"
+  },
+  "welcome": {
+    "title": "Willkommen!",
+    "subtitle": "Schön, dass du hier bist.",
+    "text": "Bisher hast du noch keine Inhalt erstellt.\n\nKlicke oben auf ein Icon oder im Menü auf *Eingabe* um deinen ersten Eintrag zu verfassen.\n\nIm Bereich *Sichten* und hier im Dashboard findest du danach immer deine Inhalte."
   },
   "general": {
     "language": "Sprache",
@@ -28,12 +32,27 @@
     "description": "Beschreibung",
     "email": "E-Mail",
     "password": "Passwort",
+    "newpassword": "Neues Passwort",
+    "gender": "Geschlecht",
+    "dateofbirth": "Geburtsdatum",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
     "categories": "Kategorie",
     "tags": "Tag",
     "viewtype": "Ansicht",
     "nodetype": "Typ",
+    "table": "Tabelle",
+    "timeline": "Zeitleiste",
+    "timelinesmall": "Zeitleiste klein",
+    "list": "Liste",
+    "cardlist": "Kacheln",
     "field": "Feld",
-    "graph": "Graph"
+    "graph": "Graph",
+    "bar": "Balken",
+    "line": "Linie",
+    "pie": "Kreis",
+    "male": "Männlich",
+    "female": "Weiblich"
   },
   "views": {
     "profile": "Profil",
@@ -46,6 +65,8 @@
     "dashboard": "Dashboard",
     "entry": "Eingabe",
 
+    "tables": "Tabellen",
+    "timeline": "Zeitleiste",
     "views": "Sichten",
     "filter": "Filter",
     "overview": "Übersicht",
@@ -61,5 +82,10 @@
     "weight": "Gewicht",
     "bodymeasurement": "Körpermaße",
     "bucketList": "Bucket List"
+  },
+  "validate": {
+    "required": "Pflichtfeld.",
+    "minchars": "Mindestens {0} Zeichen.",
+    "num": "Keine gültige Zahl."
   }
 }

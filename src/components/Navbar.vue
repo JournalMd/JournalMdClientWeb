@@ -2,7 +2,7 @@
   <nav>
     <v-navigation-drawer v-model="drawer" app v-if="authenticated && user != null">
       <template v-slot:prepend>
-        <v-list-item two-line>
+        <v-list-item two-line to="/profile">
           <v-list-item-avatar>
             <v-icon>mdi-account</v-icon>
           </v-list-item-avatar>
@@ -132,15 +132,16 @@ export default class Navbar extends Vue {
       { icon: 'mdi-view-dashboard', text: 'views.dashboard', route: '/' },
       // { icon: 'mdi-test-tube', text: 'test.test', route: '/test/12345678?queryParam=test-value' }, // TEST!!!!!
       { icon: 'mdi-card-text', text: 'views.entry', route: '/entry' },
+      { icon: 'mdi-timeline', text: 'views.timeline', route: '/types/all?view=timeline' },
     ];
 
     views: any[] = [
       {
-        icon: 'mdi-view-quilt',
-        text: 'views.views',
+        icon: 'mdi-table-large',
+        text: 'views.tables',
         active: true,
         items: [
-          { icon: 'mdi-view-list', text: 'views.overview', route: '/types/all?view=timeline' },
+          { icon: 'mdi-view-list', text: 'views.overview', route: '/types/all' },
           { icon: 'mdi-note-text', text: 'views.notes', route: '/types/note' },
           { icon: 'mdi-check-box-outline', text: 'views.tasks', route: '/types/task' },
           { icon: 'mdi-format-list-checks', text: 'views.projects', route: '/types/project' },
@@ -155,7 +156,7 @@ export default class Navbar extends Vue {
       },
       {
         icon: 'mdi-view-quilt',
-        text: 'views.filter',
+        text: 'views.views',
         active: false,
         items: [
           {

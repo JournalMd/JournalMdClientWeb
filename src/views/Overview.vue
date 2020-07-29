@@ -7,14 +7,14 @@
         </h1>
       </v-col>
       <v-col cols="12">
-        <BaseCard title="Filter">
+        <BaseCard :title="$t('views.filter')">
           <v-row>
             <v-col cols="6">
               <v-select :items="viewTypes" v-model="selectedViewType" dense :label="$t('fields.viewtype')"></v-select>
             </v-col>
             <v-col cols="6">
               <v-select :items="noteTypes" item-value="name" item-text="title" v-model="currentNodeType" dense
-                :label="$t('fields.nodetype')"></v-select>
+                :label="$t('fields.nodetype')" clearable></v-select>
             </v-col>
           </v-row>
           <v-row>
@@ -101,18 +101,18 @@ export default class Overview extends Mixins(NoteTypesMixin) {
   filterTags: number[] = [];
 
   viewTypes: { value: string, text: string }[] = [
-    { value: 'table', text: 'Table' }, // TODO: Translate
-    { value: 'timeline', text: 'Timeline' },
-    { value: 'timeline-small', text: 'Timeline small' },
-    { value: 'list', text: 'List' },
-    { value: 'card-list', text: 'Card list' },
-    { value: 'graph', text: 'Graph' },
+    { value: 'table', text: VueI18n.t('fields.table').toString() },
+    { value: 'timeline', text: VueI18n.t('fields.timeline').toString() },
+    { value: 'timeline-small', text: VueI18n.t('fields.timelinesmall').toString() },
+    { value: 'list', text: VueI18n.t('fields.list').toString() },
+    { value: 'card-list', text: VueI18n.t('fields.cardlist').toString() },
+    { value: 'graph', text: VueI18n.t('fields.graph').toString() },
   ];
 
   graphType: { value: string, text: string }[] = [
-    { value: 'Bar', text: 'Bar' }, // TODO: Translate
-    { value: 'Line', text: 'Line' },
-    { value: 'Pie', text: 'Pie' },
+    { value: 'Bar', text: VueI18n.t('fields.bar').toString() },
+    { value: 'Line', text: VueI18n.t('fields.line').toString() },
+    { value: 'Pie', text: VueI18n.t('fields.pie').toString() },
   ];
 
   fields: any = [];
@@ -135,13 +135,24 @@ export default class Overview extends Mixins(NoteTypesMixin) {
   }
 
   @Watch('noteTypes')
+  @Watch('currentNodeType')
   onNoteTypesChanged(to: any, from: any) {
-    this.fields = this.noteTypes.map((sel: any) => sel.noteFields).flat(1)
-      .map((sel: any) => ({
-        value: sel.id,
-        text: sel.title,
-      }));
-    this.fields.push({ value: 'mood', text: VueI18n.t('views.mood') });
+    const tmpFields = [];
+    tmpFields.push({ value: 'mood', text: VueI18n.t('views.mood') });
+    for (let i = 0; i < this.noteTypes.length; i += 1) {
+      if ((this.currentNodeType !== 'all' && this.currentNodeType !== undefined) && this.currentNodeType !== this.noteTypes[i].name) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      for (let j = 0; j < this.noteTypes[i].noteFields.length; j += 1) {
+        tmpFields.push({
+          value: this.noteTypes[i].noteFields[j].id,
+          text: `${this.noteTypes[i].title} - ${this.noteTypes[i].noteFields[j].title}`,
+        });
+      }
+    }
+    this.fields = tmpFields;
   }
 
   // Extract route like '/types/all?view=graph&viewsettings=%7B%22type%22%3A%22Pie%22%2C%22field%22%3A%22mood%22%7D'

@@ -1,10 +1,14 @@
 {
-  "welcome": "Welcome!",
+  "globaltest": "Global Test!",
   "test": {
     "test": "Test",
-    "welcome": "test.Welcome!",
     "hello": "{0} World",
     "apple": "no apples | one apple | {count} apples"
+  },
+  "welcome": {
+    "title": "Welcome!",
+    "subtitle": "Nice to have you here.",
+    "text": "You have not yet created any content.\n\nClick on an icon above or in the menu on *Enter* to create your first entry.\n\nIn the *Views* section and in this dashboard you will always find your content afterwards."
   },
   "general": {
     "language": "Language",
@@ -28,12 +32,27 @@
     "description": "Description",
     "email": "E-Mail",
     "password": "Password",
+    "newpassword": "New password",
+    "gender": "Gender",
+    "dateofbirth": "Date of birth",
+    "firstname": "First name",
+    "lastname": "Last name",
     "categories": "Categorie",
     "tags": "Tag",
     "viewtype": "View",
     "nodetype": "Type",
+    "table": "Table",
+    "timeline": "Timeline",
+    "timelinesmall": "Timeline small",
+    "list": "List",
+    "cardlist": "Card list",
     "field": "Field",
-    "graph": "Graph"
+    "graph": "Graph",
+    "bar": "Bar",
+    "line": "Line",
+    "pie": "Pie",
+    "male": "Male",
+    "female": "Female"
   },
   "views": {
     "profile": "Profile",
@@ -46,6 +65,8 @@
     "dashboard": "Dashboard",
     "entry": "Entry",
 
+    "tables": "Tables",
+    "timeline": "Timeline",
     "views": "Views",
     "filter": "Filter",
     "overview": "Overview",
@@ -61,5 +82,10 @@
     "weight": "Weight",
     "bodymeasurement": "Body Measurement",
     "bucketList": "Bucket List"
+  },
+  "validate": {
+    "required": "Required.",
+    "minchars": "Minimum {0} characters.",
+    "num": "Not a valid number."
   }
 }
