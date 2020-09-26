@@ -45,7 +45,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="getNotesByType('goal').length > 0">
       <v-col cols="12">
         <TypeViewWrapper viewType="card-list" :notes="getNotesByType('all')" :maxItems=6 :filterTypes="[4]" />
       </v-col>

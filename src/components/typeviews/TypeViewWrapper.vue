@@ -5,7 +5,7 @@
     <Timeline v-else-if="viewType === 'timeline'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
       :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <TimelineSmall v-else-if="viewType === 'timeline-small'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
-      :categories="categories" :tags="tags" @edit="onEdit" @delete-note="onDelete" />
+      :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <List v-else-if="viewType === 'list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"
       :categories="categories" :tags="tags" @edit-note="onEdit" @delete-note="onDelete" />
     <CardList v-else-if="viewType === 'card-list'" v-bind="$props" :notes="filteredNotes" :noteTypes="noteTypes"

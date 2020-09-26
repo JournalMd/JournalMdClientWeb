@@ -12,6 +12,7 @@
       class="elevation-1"
       :hide-default-header="compact"
       :hide-default-footer="compact"
+      @dblclick:row="(e, data) => $emit('edit-note', data.item)"
     >
       <template v-slot:item.noteTypeId="{ item }">
         <v-chip :color="noteTypes.find(sel => sel.id === item.noteTypeId).name | typecolor">
