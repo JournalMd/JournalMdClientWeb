@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="1200px">
+  <v-dialog v-model="dialog" persistent max-width="1400px">
     <v-card>
       <v-card-title>
         <span class="headline">
@@ -20,7 +20,16 @@
                 <vue-easymde v-model="note.description" ref="markdownEditor" :configs="configs" />
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" v-if="type.noteDescriptionShort">
+                <v-text-field v-model="note.description" :label="$t('fields.description')" filled></v-text-field>
+              </v-col>
+
+              <v-col cols="12" md="4">
+                <v-label dense>Mood</v-label>
+                <EmoticonRating :mood="note.mood" @input="note.mood = $event" filled />
+              </v-col>
+
+              <v-col cols="12" md="4">
                 <v-menu v-model="datemenu" :close-on-content-click="false"
                         :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
@@ -30,7 +39,7 @@
                 </v-menu>
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" md="4">
                 <v-menu v-model="timemenu" :close-on-content-click="false"
                         :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
@@ -40,16 +49,7 @@
                 </v-menu>
               </v-col>
 
-              <v-col cols="12" v-if="type.noteDescriptionShort">
-                <v-text-field v-model="note.description" :label="$t('fields.description')" filled></v-text-field>
-              </v-col>
-
-              <v-col cols="12">
-                <v-label dense>Mood</v-label>
-                <EmoticonRating :mood="note.mood" @input="note.mood = $event" filled />
-              </v-col>
-
-              <v-col cols="12">
+              <v-col cols="12" md="6">
                 <v-autocomplete
                   v-model="note.categories"
                   :items="categories"
@@ -59,11 +59,11 @@
                   multiple
                   chips
                   small-chips
-                  filled
+                  outlined
                 ></v-autocomplete>
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" md="6">
                 <v-autocomplete
                   v-model="note.tags"
                   :items="tags"
@@ -73,7 +73,7 @@
                   multiple
                   chips
                   small-chips
-                  filled
+                  outlined
                 >
                   <v-icon slot="append-outer" color="green" @click="addTag">mdi-plus</v-icon>
                 </v-autocomplete>
@@ -199,8 +199,11 @@ export default class CreateEditDialog extends Mixins(NoteTypesMixin) {
         noteTypeId: this.$store.state.dialogs.createNote.id,
         fields: noteFields,
         date: new Date(),
-        tmpDate: (new Date()).toISOString().split('T')[0],
-        tmpTime: (new Date()).toISOString().split('T')[1].substr(0, 5), // HH:MM
+        tmpDate: `${new Date().getFullYear().toString()}-`
+          + `${new Date().getMonth().toString().padStart(2, '0')}-`
+          + `${new Date().getDate().toString().padStart(2, '0')}`, // ISO 8601 date string (YYYY-MM-DD)
+        tmpTime: `${new Date().getHours().toString().padStart(2, '0')}:`
+          + `${new Date().getMinutes().toString().padStart(2, '0')}`, // HH:MM
       };
     } // else - won't show anyway
 

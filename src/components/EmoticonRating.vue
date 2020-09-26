@@ -3,7 +3,6 @@
     <template v-slot:item="props">
       <v-icon
         :color="props.isFilled ? genColor(props.index) : 'grey lighten-1'"
-        large
         @click="props.click"
       >
         {{ props.index + 1 | emoticonicon }}
