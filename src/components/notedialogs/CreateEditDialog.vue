@@ -12,7 +12,7 @@
           <v-container>
             <v-row dense>
               <v-col cols="12">
-                <v-text-field v-model="note.title" :label="$t('fields.title')" filled
+                <v-text-field v-model="note.title" :label="$t('fields.title') + '*'" filled
                   :rules="[rules.required, rules.min3]"></v-text-field>
               </v-col>
 
@@ -80,11 +80,15 @@
               </v-col>
 
               <v-col cols="12" v-for="field in type.noteFields" :key="field.id">
-                <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.id].value" :label="field.title"
-                              filled :rules="[rules.number, field.required ? rules.required : true]" />
-                <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.id].value" :label="field.title" />
-                <v-menu v-if="field.type === 'date' || field.type === 'datetime'" v-model="datefieldmenu" :close-on-content-click="false"
-                        :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
+                <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.id].value"
+                  :label="`${field.title}${field.required ? '*' : ''}`"
+                  :rules="[rules.number, field.required ? rules.required : true]"
+                  filled  />
+                <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.id].value"
+                  :label="field.title" />
+                <v-menu v-if="field.type === 'date' || field.type === 'datetime'" v-model="datefieldmenu"
+                  :close-on-content-click="false"
+                  :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
                     <v-text-field v-model="note.fields[field.id].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" />
                   </template>
