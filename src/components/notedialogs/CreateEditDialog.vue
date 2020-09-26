@@ -12,7 +12,7 @@
           <v-container>
             <v-row dense>
               <v-col cols="12">
-                <v-text-field v-model="note.title" :label="$t('fields.title') + '*'" filled
+                <v-text-field v-model="note.title" :label="$t('fields.title') + '*'" outlined
                   :rules="[rules.required, rules.min3]"></v-text-field>
               </v-col>
 
@@ -21,19 +21,30 @@
               </v-col>
 
               <v-col cols="12" v-if="type.noteDescriptionShort">
-                <v-text-field v-model="note.description" :label="$t('fields.description')" filled></v-text-field>
+                <v-text-field v-model="note.description" :label="$t('fields.description')" outlined></v-text-field>
               </v-col>
 
               <v-col cols="12" md="4">
-                <v-label dense>Mood</v-label>
-                <EmoticonRating :mood="note.mood" @input="note.mood = $event" filled />
+                <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-text-field
+                  v-text-field--is-booted v-text-field--enclosed v-text-field--outlined">
+                  <div class="v-input__control">
+                    <div class="v-input__slot">
+                      <fieldset aria-hidden="true" style="margin-top: 4px;"><legend style="width: 44px;"></legend></fieldset>
+                      <div class="v-text-field__slot">
+                        <label for="input-er" class="v-label v-label--active theme--light"
+                          style="left: 0px; right: auto; position: absolute;">Mood</label>
+                        <EmoticonRating :mood="note.mood" @input="note.mood = $event" id="input-er" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </v-col>
 
               <v-col cols="12" md="4">
                 <v-menu v-model="datemenu" :close-on-content-click="false"
                         :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
-                    <v-text-field v-model="note.tmpDate" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" />
+                    <v-text-field v-model="note.tmpDate" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" outlined/>
                   </template>
                   <v-date-picker v-model="note.tmpDate" @input="datemenu = false" />
                 </v-menu>
@@ -43,7 +54,7 @@
                 <v-menu v-model="timemenu" :close-on-content-click="false"
                         :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
-                    <v-text-field v-model="note.tmpTime" label="Time" prepend-icon="mdi-clock" readonly v-on="on" />
+                    <v-text-field v-model="note.tmpTime" label="Time" prepend-icon="mdi-clock" readonly v-on="on" outlined />
                   </template>
                   <v-time-picker v-model="note.tmpTime" @input="timemenu = false" format="24hr" />
                 </v-menu>
@@ -83,14 +94,15 @@
                 <v-text-field v-if="field.type === 'number'" v-model="note.fields[field.id].value"
                   :label="`${field.title}${field.required ? '*' : ''}`"
                   :rules="[rules.number, field.required ? rules.required : true]"
-                  filled  />
+                  outlined  />
                 <v-checkbox v-if="field.type === 'boolean'" v-model="note.fields[field.id].value"
                   :label="field.title" />
                 <v-menu v-if="field.type === 'date' || field.type === 'datetime'" v-model="datefieldmenu"
                   :close-on-content-click="false"
                   :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
                   <template v-slot:activator="{ on }">
-                    <v-text-field v-model="note.fields[field.id].value" label="Date" prepend-icon="mdi-calendar" readonly v-on="on" />
+                    <v-text-field v-model="note.fields[field.id].value"
+                      label="Date" prepend-icon="mdi-calendar" readonly v-on="on" outlined />
                   </template>
                   <v-date-picker v-model="note.fields[field.id].value" @input="datefieldmenu = false" />
                 </v-menu>
